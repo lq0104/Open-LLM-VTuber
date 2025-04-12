@@ -114,7 +114,7 @@ jobs:
           set -e
 
           # Fetch the latest release JSON from the GitHub API
-          RELEASE_JSON=$(curl --silent "https://api.github.com/repos/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest")
+          RELEASE_JSON=$(curl --silent "https://api.github.com/repos/lq0104/Open-LLM-VTuber-Web/releases/latest")
 
           # Use jq to extract browser_download_url for assets ending with .exe or .dmg
           ASSET_URLS=$(echo "$RELEASE_JSON" | jq -r '.assets[] | select(.name | endswith(".exe") or endswith(".dmg")) | .browser_download_url')
