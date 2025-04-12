@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.responses import Response
 
 from .routes import init_client_ws_route, init_webtool_routes
+from .game.routes import init_game_routes
 from .service_context import ServiceContext
 from .config_manager.utils import Config
 
@@ -51,6 +52,9 @@ class WebSocketServer:
         self.app.include_router(
             init_webtool_routes(default_context_cache=default_context_cache),
         )
+        self.app.include_router(
+            init_game_routes(default_context_cache=default_context_cache),
+        )
 
         # Mount cache directory first (to ensure audio file access)
         if not os.path.exists("cache"):
@@ -77,6 +81,10 @@ class WebSocketServer:
             AvatarStaticFiles(directory="avatars"),
             name="avatars",
         )
+
+        # 确保故事目录存在
+        if not os.path.exists("stories"):
+            os.makedirs("stories")
 
         # Mount web tool directory separately from frontend
         self.app.mount(

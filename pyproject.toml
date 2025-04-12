@@ -46,3 +46,7 @@ open-llm-vtuber = { path = ".", editable = true }
 [tool.pixi.dependencies]
 cudnn = ">=8.0,<9"
 cudatoolkit = ">=11.0,<12"
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+default = true
