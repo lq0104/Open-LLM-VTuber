@@ -1,0 +1,545 @@
+# 互动小说示例：神秘森林的秘密
+title: "神秘森林的秘密"
+author: "Open-LLM-VTuber"
+description: "探索一个充满魔法和谜题的神秘森林，寻找失落的宝藏。"
+start_scene: "forest_entrance"
+
+scenes:
+  forest_entrance:
+    initial_dialogue: |
+      [joy]欢迎来到神秘森林，旅行者！
+      我是这片森林的守护者志津久。
+      这片森林有着许多秘密和宝藏，但也有着危险。
+      你是为了什么而来到这里的呢？
+    choices:
+      - choice_id: "treasure"
+        text: "我是来寻找宝藏的"
+        next_scene: "forest_path"
+        effects:
+          treasure_hunter: true
+        keywords: ["宝藏", "财宝", "寻宝", "寻找", "宝物", "藏宝", "金银", "财富"]
+        descriptions: 
+          - "我想寻找传说中的宝藏"
+          - "我听说这里有宝藏，所以来找找看"
+          - "我是个宝藏猎人，想在这里碰碰运气"
+          - "我对森林里的宝藏很感兴趣"
+      - choice_id: "adventure"
+        text: "我只是想要冒险"
+        next_scene: "forest_path"
+        effects:
+          adventurer: true
+        keywords: ["冒险", "探险", "历险", "探索", "体验", "经历", "玩", "游玩"]
+        descriptions:
+          - "我想来这里冒险"
+          - "我只是来体验一下刺激的冒险"
+          - "我喜欢探索新的地方"
+          - "我是个冒险家，想寻找新奇的经历"
+      - choice_id: "lost"
+        text: "我只是迷路了"
+        next_scene: "guide_out"
+        keywords: ["迷路", "迷失", "找不到", "方向", "路", "走丢", "误入", "不小心"]
+        descriptions:
+          - "我迷路了，不是有意来到这里的"
+          - "我走错了路，现在不知道该怎么出去"
+          - "我是不小心进来的，能帮我找到出去的路吗"
+          - "我不是故意进入这个森林的，我只是迷失了方向"
+    is_end_scene: false
+    confirmation_dialogue: "你是想{options}中的哪一个呢？还是有其他想法？"
+
+  guide_out:
+    initial_dialogue: |
+      [surprised]哦，看起来你并不是有意来到这里的。
+      这片森林的确很容易让人迷路。
+      我可以带你找到出去的路，不过...
+      你确定不想看看这里有什么特别的地方吗？
+    choices:
+      - choice_id: "curious"
+        text: "好吧，我有点好奇了"
+        next_scene: "forest_path"
+        keywords: ["好奇", "想看", "看看", "探索", "想知道", "感兴趣", "行", "可以"]
+        descriptions:
+          - "既然来了，那就看看这里有什么特别的吧"
+          - "我对这个森林有点好奇，想多了解一下"
+          - "好的，我愿意看看这里有什么神奇的地方"
+          - "行，我改变主意了，想探索一下"
+      - choice_id: "leave"
+        text: "不了，我想回家"
+        next_scene: "ending_left"
+        keywords: ["不", "回家", "离开", "出去", "回去", "算了", "不要", "不用"]
+        descriptions:
+          - "不了，我只想回家"
+          - "我不感兴趣，只想离开这里"
+          - "算了吧，我还是想出去"
+          - "谢谢，但我想尽快回去"
+    is_end_scene: false
+
+  forest_path:
+    initial_dialogue: |
+      沿着这条小路前进，你会发现森林的秘密。
+      我可以给你一个提示，但你需要做出选择。
+      [happy]前方有两条路，左边通向古老的神庙，右边通向神秘的湖泊。
+      你想走哪条路？
+    choices:
+      - choice_id: "temple"
+        text: "去古老的神庙"
+        next_scene: "ancient_temple"
+        keywords: ["神庙", "左边", "寺庙", "古老", "古代", "遗迹", "左路", "庙"]
+        descriptions:
+          - "我想去看看左边的神庙"
+          - "古老的神庙听起来很有历史感，我选这个"
+          - "我对神庙比较感兴趣"
+          - "我喜欢探索古迹，所以选神庙"
+      - choice_id: "lake"
+        text: "去神秘的湖泊"
+        next_scene: "mystic_lake"
+        keywords: ["湖泊", "右边", "湖", "水", "右路", "池", "水域", "水面"]
+        descriptions:
+          - "我想去右边的湖泊看看"
+          - "神秘的湖泊听起来很美，我选这个"
+          - "我对水域比较感兴趣"
+          - "湖泊可能会有意想不到的发现，我想去那里"
+    is_end_scene: false
+
+  ancient_temple:
+    initial_dialogue: |
+      你来到了一座古老的神庙前，门口站着一位白发少女。
+      [surprised]"你好，旅行者。我是玛希萝，这座神庙的守护者。"
+      "要进入神庙，你必须先回答我的谜题。"
+      "什么东西在白天有四条腿，中午有两条腿，晚上有三条腿？"
+    choices:
+      - choice_id: "human"
+        text: "人"
+        next_scene: "temple_interior"
+        effects:
+          add_achievement: "解谜高手"
+        keywords: ["人", "人类", "人生", "婴儿", "成人", "老人", "爬行", "走路", "拐杖"]
+        descriptions:
+          - "答案是人"
+          - "是人类：婴儿爬行有四条腿，成人走路有两条腿，老人拄拐杖有三条腿"
+          - "人，因为人生的不同阶段有不同的腿数"
+          - "这是关于人的谜语：人在一生中经历不同阶段"
+      - choice_id: "wrong_answer"
+        text: "给出错误答案"
+        next_scene: "temple_refused"
+        keywords: ["不知道", "不会", "不清楚", "其他", "猜", "狗", "猫", "动物", "桌子", "椅子"]
+        descriptions:
+          - "我不知道答案"
+          - "这太难了，我想不出来"
+          - "是某种动物吗？"
+          - "我猜是某种家具？"
+    is_end_scene: false
+
+  temple_refused:
+    initial_dialogue: |
+      [sad]"很遗憾，你的答案不正确。"
+      "你需要再思考一下，或者去别的地方寻找线索。"
+      "当你准备好了，可以再回来尝试。"
+    choices:
+      - choice_id: "try_again"
+        text: "再次尝试"
+        next_scene: "ancient_temple"
+        keywords: ["再试", "再来", "重试", "再次", "思考", "尝试", "答案", "想想"]
+        descriptions:
+          - "我再试一次"
+          - "我想再思考一下"
+          - "我想我知道答案了，再给我一次机会"
+          - "让我再回答一次吧"
+      - choice_id: "go_to_lake"
+        text: "去湖泊看看"
+        next_scene: "mystic_lake"
+        keywords: ["湖泊", "湖", "水", "离开", "放弃", "转向", "线索", "别处"]
+        descriptions:
+          - "我还是去湖泊看看吧"
+          - "算了，我想去湖泊那边找找线索"
+          - "这个太难了，我先去别的地方看看"
+          - "不再尝试了，我要去湖泊"
+    is_end_scene: false
+
+  temple_interior:
+    initial_dialogue: |
+      [happy]"恭喜你，回答正确！"
+      少女带你进入神庙内部，这里有古老的壁画和雕像。
+      "这座神庙记录着森林的历史和秘密。"
+      "传说中，宝藏的钥匙就藏在这里和湖泊中。"
+      "你需要找到两把钥匙才能打开宝藏。"
+    choices:
+      - choice_id: "take_temple_key"
+        text: "寻找神庙钥匙"
+        next_scene: "find_temple_key"
+        keywords: ["寻找", "找", "搜索", "钥匙", "神庙钥匙", "这里", "查看", "调查"]
+        descriptions:
+          - "我想先在这里找找钥匙"
+          - "我要搜索神庙，找到这里的钥匙"
+          - "神庙的钥匙在哪里？我要找找看"
+          - "让我在神庙里搜索一下钥匙"
+      - choice_id: "go_to_lake"
+        text: "先去湖泊看看"
+        next_scene: "mystic_lake"
+        conditions:
+          temple_key: null
+        keywords: ["湖泊", "湖", "先去", "另一把", "第二把", "另外", "水", "另一个"]
+        descriptions:
+          - "我想先去湖泊看看"
+          - "我准备去湖泊找另一把钥匙"
+          - "让我先去湖泊那边"
+          - "神庙钥匙可能不好找，先去湖泊试试"
+    is_end_scene: false
+
+  find_temple_key:
+    initial_dialogue: |
+      你仔细搜索神庙，在一尊古老雕像的底座找到了一把黄金钥匙。
+      [joy]"你找到了神庙的钥匙！这是宝藏的第一把钥匙。"
+      "现在你需要找到湖泊的钥匙。"
+    choices:
+      - choice_id: "go_to_lake"
+        text: "去湖泊寻找第二把钥匙"
+        next_scene: "mystic_lake"
+        effects:
+          temple_key: true
+          add_achievement: "神庙探索者"
+        keywords: ["湖泊", "去湖泊", "第二把", "另一把", "去找", "继续", "下一步", "下一个"]
+        descriptions:
+          - "现在我要去湖泊找另一把钥匙"
+          - "前往湖泊寻找第二把钥匙"
+          - "该去湖泊了"
+          - "继续我的探索，前往湖泊"
+    is_end_scene: false
+
+  mystic_lake:
+    initial_dialogue: |
+      你来到一个宁静的湖泊边，湖水清澈见底，倒映着天空。
+      湖边坐着一位红发少女，她正在轻轻哼唱。
+      [surprised]"哦，你好啊，旅行者。我是湖之女神麻喜。"
+      "很少有人能找到这个隐秘的湖泊。"
+    choices:
+      - choice_id: "ask_key"
+        text: "询问关于钥匙的事"
+        next_scene: "lake_riddle"
+        conditions:
+          temple_key: true
+        keywords: ["钥匙", "询问", "问", "宝藏", "神庙", "另一把", "第二把", "寻找"]
+        descriptions:
+          - "我想问问关于湖泊钥匙的事"
+          - "我已经找到了神庙的钥匙，你知道湖泊的钥匙在哪里吗？"
+          - "你知道有关宝藏钥匙的信息吗？"
+          - "我需要找到湖泊的钥匙，能帮我吗？"
+      - choice_id: "chat"
+        text: "与她闲聊"
+        next_scene: "lake_chat"
+        keywords: ["聊天", "闲聊", "交谈", "说话", "你好", "介绍", "认识", "谈"]
+        descriptions:
+          - "我想和你聊聊天"
+          - "你能告诉我更多关于你自己的事情吗？"
+          - "这个湖泊真美，你住在这里吗？"
+          - "你是怎么成为湖之女神的？"
+      - choice_id: "go_to_temple"
+        text: "告诉她你要去神庙"
+        next_scene: "ancient_temple"
+        conditions:
+          temple_key: null
+        keywords: ["神庙", "去神庙", "打算", "准备", "回去", "返回", "参观", "拜访"]
+        descriptions:
+          - "我打算去看看古老的神庙"
+          - "我还没去过神庙，想先去那里看看"
+          - "我需要去神庙寻找钥匙"
+          - "我想我应该先去神庙一趟"
+    is_end_scene: false
+
+  lake_chat:
+    initial_dialogue: |
+      [happy]"很高兴能有人陪我聊天。这个湖泊虽然美丽，但有时也很孤独。"
+      "你是来自外面的世界吧？那里是什么样子的？"
+      你们聊了很多，分享了各自的故事。麻喜似乎很享受你的陪伴。
+      "谢谢你愿意听我说这么多。如果你有什么需要，尽管告诉我。"
+    choices:
+      - choice_id: "ask_key"
+        text: "询问关于钥匙的事"
+        next_scene: "lake_riddle"
+        conditions:
+          temple_key: true
+        keywords: ["钥匙", "询问", "问", "宝藏", "神庙", "另一把", "第二把", "寻找"]
+        descriptions:
+          - "我想问问关于湖泊钥匙的事"
+          - "我已经找到了神庙的钥匙，你知道湖泊的钥匙在哪里吗？"
+          - "你知道有关宝藏钥匙的信息吗？"
+          - "我需要找到湖泊的钥匙，能帮我吗？"
+      - choice_id: "go_to_temple"
+        text: "告诉她你要去神庙"
+        next_scene: "ancient_temple"
+        conditions:
+          temple_key: null
+        keywords: ["神庙", "去神庙", "打算", "准备", "回去", "返回", "参观", "拜访"]
+        descriptions:
+          - "我打算去看看古老的神庙"
+          - "我还没去过神庙，想先去那里看看"
+          - "我需要去神庙寻找钥匙"
+          - "我想我应该先去神庙一趟"
+      - choice_id: "swim"
+        text: "请求在湖中游泳"
+        next_scene: "lake_swim"
+        keywords: ["游泳", "游", "水", "湖水", "泡", "入水", "下水", "洗"]
+        descriptions:
+          - "这湖水看起来很清澈，我可以在里面游泳吗？"
+          - "我能在湖里游一游吗？"
+          - "我想感受一下湖水的温度，可以吗？"
+          - "能否让我在这美丽的湖中畅游？"
+    is_end_scene: false
+
+  lake_swim:
+    initial_dialogue: |
+      [surprised]"你想在湖里游泳？当然可以，这湖水有净化心灵的功效。"
+      你脱下外衣，跳入湖中。水意外地温暖，让你感到舒适。
+      当你潜入水中，你注意到湖底有什么闪闪发光的东西。
+    choices:
+      - choice_id: "dive"
+        text: "潜到湖底查看"
+        next_scene: "lake_discovery"
+        keywords: ["潜", "深入", "下潜", "湖底", "沉", "探索", "查看", "发光"]
+        descriptions:
+          - "我要潜到湖底看看那闪光的东西是什么"
+          - "我想调查湖底的那个发光物体"
+          - "下潜去湖底查看那个神秘的光源"
+          - "我要去湖底一探究竟"
+      - choice_id: "surface"
+        text: "回到岸上"
+        next_scene: "mystic_lake"
+        keywords: ["上岸", "回岸", "岸上", "上去", "离开", "出水", "游回", "返回"]
+        descriptions:
+          - "算了，我还是回岸上吧"
+          - "我不想冒险，先回到岸上"
+          - "湖底可能有危险，我还是上岸吧"
+          - "我游累了，想回到岸上"
+    is_end_scene: false
+
+  lake_discovery:
+    initial_dialogue: |
+      你潜入湖底，发现一个小盒子嵌在岩石中。你设法将它取出。
+      回到岸上，麻喜看起来很惊讶。
+      [surprised]"你找到了湖之盒！它里面可能藏着湖泊的钥匙。"
+      "不过，打开它需要回答一个问题..."
+    choices:
+      - choice_id: "open_box"
+        text: "尝试打开盒子"
+        next_scene: "lake_riddle"
+        keywords: ["打开", "尝试", "开启", "试试", "盒子", "盒", "回答", "问题"]
+        descriptions:
+          - "我想试着打开这个盒子"
+          - "让我尝试打开它"
+          - "我准备回答问题，打开盒子"
+          - "我要打开这个小盒子"
+    is_end_scene: false
+
+  lake_riddle:
+    initial_dialogue: |
+      [serious]"要获得湖泊的钥匙，你需要回答我的问题。"
+      "它无声地来，无形地去，你无法看见它，但能感受到它的力量。它是什么？"
+    choices:
+      - choice_id: "wind"
+        text: "风"
+        next_scene: "get_lake_key"
+        effects:
+          add_achievement: "湖泊智者"
+        keywords: ["风", "空气", "气流", "微风", "空中", "吹", "流动", "无形"]
+        descriptions:
+          - "答案是风"
+          - "我猜是风，它看不见但能感受到"
+          - "风是无形的，但有力量"
+          - "是风，它无声来无形去，但能感受到它的存在"
+      - choice_id: "wrong_answer"
+        text: "给出错误答案"
+        next_scene: "lake_wrong"
+        keywords: ["不知道", "不确定", "猜", "爱", "思念", "时间", "光", "影子", "幽灵"]
+        descriptions:
+          - "我不确定答案是什么"
+          - "是爱吗？"
+          - "可能是时间？"
+          - "光或者影子？"
+    is_end_scene: false
+
+  lake_wrong:
+    initial_dialogue: |
+      [sad]"很遗憾，这不是正确答案。"
+      "仔细思考一下，或者在森林中寻找更多线索。"
+      "当你准备好了，可以再回来尝试。"
+    choices:
+      - choice_id: "try_again"
+        text: "再次尝试"
+        next_scene: "lake_riddle"
+        keywords: ["再试", "再来", "重试", "再次", "思考", "尝试", "答案", "想想"]
+        descriptions:
+          - "我再试一次"
+          - "让我再思考一下"
+          - "我想我知道答案了，再给我一次机会"
+          - "我想再回答一次"
+      - choice_id: "explore_more"
+        text: "去别处探索"
+        next_scene: "forest_path"
+        keywords: ["别处", "探索", "离开", "暂时", "回去", "森林", "路", "走"]
+        descriptions:
+          - "我先去别处看看再回来"
+          - "让我再去森林里探索一下"
+          - "我想回到森林路口重新选择"
+          - "先离开一下，思考清楚再回来"
+    is_end_scene: false
+
+  get_lake_key:
+    initial_dialogue: |
+      [happy]"答对了！风，无形却有力，就像智慧一样。"
+      麻喜从湖中取出一把蓝色的钥匙，递给你。
+      "这是湖泊的钥匙，是宝藏的第二把钥匙。"
+      "现在你拥有了两把钥匙，可以去寻找宝藏了。"
+    choices:
+      - choice_id: "find_treasure"
+        text: "去寻找宝藏"
+        next_scene: "treasure_gate"
+        conditions:
+          temple_key: true
+        effects:
+          lake_key: true
+        keywords: ["宝藏", "去找", "寻找", "寻宝", "两把", "钥匙", "门", "开启"]
+        descriptions:
+          - "现在我要去寻找宝藏了"
+          - "我已经有两把钥匙了，该去开启宝藏之门了"
+          - "我想去找宝藏入口"
+          - "带上两把钥匙，去寻找传说中的宝藏"
+      - choice_id: "get_temple_key"
+        text: "先去神庙找钥匙"
+        next_scene: "ancient_temple"
+        conditions:
+          temple_key: null
+        effects:
+          lake_key: true
+        keywords: ["神庙", "第一把", "还没", "神庙钥匙", "另一把", "黄金", "去找", "缺少"]
+        descriptions:
+          - "我还没有神庙的钥匙，先去找找"
+          - "我需要去神庙寻找另一把钥匙"
+          - "还缺一把神庙钥匙，我去拿一下"
+          - "先去神庙找到黄金钥匙再回来"
+    is_end_scene: false
+
+  treasure_gate:
+    initial_dialogue: |
+      志津久带你来到森林深处的一个古老石门前。
+      [serious]"这就是宝藏之门，只有同时拥有神庙和湖泊的钥匙才能开启。"
+      "你准备好面对宝藏和它背后的秘密了吗？"
+    choices:
+      - choice_id: "open_gate"
+        text: "使用两把钥匙开门"
+        next_scene: "treasure_room"
+        conditions:
+          temple_key: true
+          lake_key: true
+        keywords: ["开门", "使用", "钥匙", "开启", "打开", "准备好", "是的", "进入"]
+        descriptions:
+          - "我要用两把钥匙打开这扇门"
+          - "是的，我准备好了，让我们开启宝藏之门"
+          - "我想知道里面有什么，用钥匙开门吧"
+          - "我已经准备好面对宝藏和秘密了，打开门吧"
+      - choice_id: "hesitate"
+        text: "犹豫不决"
+        next_scene: "forest_path"
+        keywords: ["犹豫", "考虑", "再想想", "不确定", "等等", "不急", "思考", "害怕"]
+        descriptions:
+          - "我还需要想想，不急着开门"
+          - "我有点犹豫，能给我一点时间考虑吗"
+          - "我不确定自己准备好了没有"
+          - "我有点害怕，让我再思考一下"
+    is_end_scene: false
+
+  treasure_room:
+    initial_dialogue: |
+      门缓缓打开，里面不是金银财宝，而是一本古老的书和一面镜子。
+      [serious]"这就是真正的宝藏 - 知识与自我认知。"
+      "书中记载着森林的魔法，镜子能映照出真实的自己。"
+      "选择其中一件作为你的奖励吧。"
+    choices:
+      - choice_id: "choose_book"
+        text: "选择魔法书"
+        next_scene: "ending_wizard"
+        effects:
+          add_achievement: "求知者"
+        keywords: ["书", "魔法书", "知识", "魔法", "学习", "力量", "智慧", "选书"]
+        descriptions:
+          - "我选择魔法书"
+          - "我对知识和魔法更感兴趣"
+          - "我想学习森林的魔法"
+          - "书中的知识对我更有吸引力"
+      - choice_id: "choose_mirror"
+        text: "选择魔镜"
+        next_scene: "ending_reflection"
+        effects:
+          add_achievement: "自省者"
+        keywords: ["镜子", "魔镜", "自我", "映照", "真实", "认知", "了解", "选镜"]
+        descriptions:
+          - "我选择魔镜"
+          - "我想看清真实的自己"
+          - "自我认知对我更重要"
+          - "我对了解自己的本质更感兴趣"
+      - choice_id: "choose_friendship"
+        text: "我选择你们的友谊"
+        next_scene: "ending_friendship"
+        effects:
+          add_achievement: "友谊至上"
+        keywords: ["友谊", "朋友", "友情", "陪伴", "你们", "情谊", "关系", "情感"]
+        descriptions:
+          - "我不需要物质奖励，你们的友谊对我而言才最珍贵"
+          - "我选择与你们成为朋友"
+          - "友谊比任何宝物都重要"
+          - "我想和你们建立长久的友谊关系"
+    is_end_scene: false
+
+  ending_wizard:
+    initial_dialogue: |
+      [joy]"你选择了知识的力量！"
+      "这本书会教给你森林的魔法，你将成为下一代的森林守护者。"
+      "从今以后，你可以随时回来，这片森林会欢迎你。"
+      
+      【结局：魔法学徒】
+      你选择了魔法书，成为了志津久的学徒，学习森林的魔法。
+      多年后，你成为了一名强大的魔法师，守护着这片神秘的森林和它的秘密。
+    choices: []
+    is_end_scene: true
+    achievements: ["魔法学徒"]
+
+  ending_reflection:
+    initial_dialogue: |
+      [calm]"你选择了自我认知。"
+      "这面镜子会向你展示真实的自己，你的过去，现在和可能的未来。"
+      "知己知彼，是最大的智慧。"
+      
+      【结局：寻找真我】
+      通过魔镜，你看清了自己的本质和人生目标。
+      带着新的认知，你回到了现实世界，开始了新的旅程，
+      但你知道，无论何时，你都可以回到这片森林，找回自我。
+    choices: []
+    is_end_scene: true
+    achievements: ["寻找真我"]
+
+  ending_friendship:
+    initial_dialogue: |
+      志津久惊讶地看着你，然后露出温暖的笑容。
+      [joy]"你选择了友谊...这是最珍贵的宝藏。"
+      玛希萝和麻喜也出现在你身边，三人围绕着你。
+      "从今以后，我们将是永远的朋友，这片森林随时欢迎你回来。"
+      
+      【结局：永恒的友谊】
+      你放弃了物质的宝藏，却获得了无价的友谊。
+      你成了森林的常客，经常回来拜访你的三位朋友，
+      在这个神奇的地方，你找到了第二个家。
+    choices: []
+    is_end_scene: true
+    achievements: ["友谊大师"]
+
+  ending_left:
+    initial_dialogue: |
+      [calm]"我理解你想回家的心情。"
+      志津久带你走出森林，来到一条熟悉的小路。
+      "这条路会带你回到村庄。也许有一天，当你准备好了，
+      你会再次回到这片森林，探索它的秘密。"
+      
+      【结局：早归的旅人】
+      你选择了安全地返回家园，没有探索森林的秘密。
+      生活回归平静，但偶尔，你会梦到那片神秘的森林，
+      和那位绿发的守护者，不知道你错过了什么...
+    choices: []
+    is_end_scene: true
