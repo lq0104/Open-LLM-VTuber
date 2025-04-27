@@ -17,7 +17,8 @@ from .types import WebSocketSend
 from .tts_manager import TTSTaskManager
 from ..chat_history_manager import store_message
 from ..service_context import ServiceContext
-
+from ..game.story import GameManager
+from ..agent.output_types import SentenceOutput, Actions, DisplayText
 
 async def process_single_conversation(
     context: ServiceContext,
@@ -137,6 +138,41 @@ async def process_agent_response(
     """
     full_response = ""
     try:
+        # 检查是否是故事模式
+        if hasattr(context, 'game_mode') and context.game_mode == "story":
+            # 使用story.py中的process_agent_response函数
+            response_data = await context.game_manager.process_agent_response(batch_input.texts[0].content)
+            
+            # 如果返回的是字典，说明是故事模式的响应
+            if isinstance(response_data, dict):
+                # 更新当前场景数据
+                context.current_scene_data = response_data
+                
+                # 构建完整的响应文本
+                response_text = response_data.get("dialogue", "")
+                dialogue_response = SentenceOutput(
+                    display_text=DisplayText(text=response_text),
+                    tts_text=response_text,
+                    actions=Actions()
+                )
+                full_response = await process_agent_output(
+                    output=dialogue_response,
+                    character_config=context.character_config,
+                    live2d_model=context.live2d_model,
+                    tts_engine=context.tts_engine,
+                    websocket_send=websocket_send,
+                    tts_manager=tts_manager,
+                    translate_engine=context.translate_engine,
+                )
+                
+                # # 如果有选项，添加到响应中
+                # if "choices" in response_data:
+                #     choices_text = "\n".join([f"{i+1}. {choice['text']}" for i, choice in enumerate(response_data["choices"])])
+                #     response_text += f"\n\n{choices_text}"
+                
+                return full_response
+        
+        # 非故事模式或故事模式处理失败，使用默认处理
         agent_output = context.agent_engine.chat(batch_input)
         async for output in agent_output:
             response_part = await process_agent_output(

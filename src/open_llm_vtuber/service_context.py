@@ -1,5 +1,6 @@
 import os
 import json
+from typing import Dict
 
 from loguru import logger
 from fastapi import WebSocket
@@ -11,6 +12,7 @@ from .tts.tts_interface import TTSInterface
 from .vad.vad_interface import VADInterface
 from .agent.agents.agent_interface import AgentInterface
 from .translate.translate_interface import TranslateInterface
+from .game.story import GameManager
 
 from .asr.asr_factory import ASRFactory
 from .tts.tts_factory import TTSFactory
@@ -47,7 +49,19 @@ class ServiceContext:
         self.agent_engine: AgentInterface = None
         # translate_engine can be none if translation is disabled
         self.vad_engine: VADInterface | None = None
-        self.translate_engine: TranslateInterface | None = None
+        self.translate_engine: TranslateInterface | None = None        
+        # 初始化故事管理器
+        self.game_manager = GameManager(self)
+        # 默认加载example_story.yaml
+        if os.path.exists("stories/example_story.yaml"):
+            self.game_manager.load_story("example_story.yaml")
+            self.game_manager.start_game()
+
+        
+        # 游戏模式，默认为story
+        self.game_mode: str = "story"
+        # 当前场景数据
+        self.current_scene_data: Dict = {}
 
         # the system prompt is a combination of the persona prompt and live2d expression prompt
         self.system_prompt: str = None
@@ -137,10 +151,11 @@ class ServiceContext:
         # init vad from character config
         self.init_vad(config.character_config.vad_config)
 
+        # TODO: 游戏模式下，使用story_persona_prompt
         # init agent from character config
         self.init_agent(
             config.character_config.agent_config,
-            config.character_config.persona_prompt,
+            config.character_config.story_persona_prompt,
         )
 
         self.init_translate(
@@ -288,7 +303,7 @@ class ServiceContext:
                     "[<insert_emomap_keys>]", self.live2d_model.emo_str
                 )
 
-            persona_prompt += prompt_content
+            # persona_prompt += prompt_content
 
         logger.debug("\n === System Prompt ===")
         logger.debug(persona_prompt)

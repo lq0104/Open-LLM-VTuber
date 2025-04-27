@@ -44,7 +44,6 @@ scenes:
           - "我是不小心进来的，能帮我找到出去的路吗"
           - "我不是故意进入这个森林的，我只是迷失了方向"
     is_end_scene: false
-    confirmation_dialogue: "你是想{options}中的哪一个呢？还是有其他想法？"
 
   guide_out:
     initial_dialogue: |

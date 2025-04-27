@@ -6,8 +6,9 @@ import time
 import re
 from pydantic import BaseModel, Field
 import difflib
+from loguru import logger
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 class StoryChoice(BaseModel):
     choice_id: str
@@ -25,7 +26,6 @@ class StoryScene(BaseModel):
     conditions: Dict[str, Any] = Field(default_factory=dict)  # 场景触发条件
     achievements: List[str] = Field(default_factory=list)  # 可获得的成就
     is_end_scene: bool = False  # 是否为结束场景
-    confirmation_dialogue: str = "对不起，我不确定你想做什么。你是想{options}吗？"  # 确认用户意图的对话模板
 
 class GameState(BaseModel):
     current_scene_id: str
@@ -33,8 +33,6 @@ class GameState(BaseModel):
     achievements: Set[str] = Field(default_factory=set)
     variables: Dict[str, Any] = Field(default_factory=dict)  # 游戏变量，用于条件判断
     dialogue_history: List[Dict] = Field(default_factory=list)  # 对话历史
-    awaiting_confirmation: bool = False  # 是否正在等待用户确认
-    confirmation_choices: List[str] = Field(default_factory=list)  # 正在确认的选项ID列表
 
 class DialogueMessage(BaseModel):
     speaker: str  # "character" 或 "user"
@@ -57,7 +55,6 @@ class GameManager:
         self.available_stories = self._get_available_stories()
         self.nlp_engine = None  # 使用服务上下文中的大模型
         self.intent_threshold = 0.6  # 意图匹配阈值，低于此值需要确认
-        self.confirmation_threshold = 0.8  # 确认匹配阈值，高于此值视为肯定回答
         self.similarity_cache = {}  # 缓存相似度计算结果
         
     def _get_available_stories(self) -> Dict[str, str]:
@@ -119,9 +116,7 @@ class GameManager:
                     choices=choices,
                     conditions=scene_data.get('conditions', {}),
                     achievements=scene_data.get('achievements', []),
-                    is_end_scene=scene_data.get('is_end_scene', False),
-                    confirmation_dialogue=scene_data.get('confirmation_dialogue', 
-                                                       "对不起，我不确定你想做什么。你是想{options}吗？")
+                    is_end_scene=scene_data.get('is_end_scene', False)
                 )
             
             self.story_data = StoryData(
@@ -138,13 +133,15 @@ class GameManager:
     
     def _extract_keywords(self, text: str) -> List[str]:
         """从文本中提取关键词"""
-        # 简单实现：分词并过滤停用词
+        # 简单实现：分词并过滤停用词 
+        # TODO: 待优化
         words = re.findall(r'\b\w+\b', text.lower())
         stop_words = {'的', '了', '是', '在', '我', '你', '他', '她', '它', '们', '和', '与', '或', '吗', '啊', '呢', '吧'}
         return [word for word in words if word not in stop_words and len(word) > 1]
         
     def start_game(self, story_filename: str = None) -> Optional[Dict]:
         """开始游戏，初始化游戏状态"""
+        # TODO: 游戏开始后，应播放故事的初始对话
         if story_filename and not self.load_story(story_filename):
             return None
             
@@ -189,15 +186,12 @@ class GameManager:
             "choices": available_choices,
             "is_end_scene": scene.is_end_scene
         }
-        
-        # 如果正在等待确认，添加确认信息
-        if self.game_state.awaiting_confirmation:
-            response_data["awaiting_confirmation"] = True
             
         return response_data
         
     def _check_conditions(self, conditions: Dict[str, Any]) -> bool:
         """检查条件是否满足"""
+        # TODO: 如果条件没有达到，玩家能知道什么原因没达到吗，要不要给玩家一些提示
         if not conditions:
             return True
             
@@ -249,10 +243,6 @@ class GameManager:
         if not self.game_state or not self.story_data:
             return {"error": "Game not initialized"}
             
-        # 重置确认状态
-        self.game_state.awaiting_confirmation = False
-        self.game_state.confirmation_choices = []
-            
         current_scene = self.story_data.scenes.get(self.game_state.current_scene_id)
         if not current_scene:
             return {"error": "Current scene not found"}
@@ -261,6 +251,7 @@ class GameManager:
         next_scene_id = None
         for choice in current_scene.choices:
             if choice.choice_id == choice_id and self._check_conditions(choice.conditions):
+                # TODO: 如果条件没有达到，玩家能知道什么原因没达到吗，要不要给玩家一些提示
                 # 应用效果
                 self._apply_effects(choice.effects)
                 next_scene_id = choice.next_scene
@@ -297,7 +288,7 @@ class GameManager:
         # 返回新场景信息
         return self.get_current_scene_data()
 
-    async def process_user_input(self, input_text: str) -> Dict:
+    async def process_agent_response(self, input_text: str) -> Dict:
         """处理用户自由输入文本，使用大模型判断用户意图"""
         if not self.game_state or not self.story_data:
             return {"error": "Game not initialized"}
@@ -313,26 +304,6 @@ class GameManager:
         if not current_scene:
             return {"error": "Current scene not found"}
         
-        # 检查是否正在等待确认
-        if self.game_state.awaiting_confirmation:
-            # 处理确认回复
-            is_confirmed, confirmed_choice = await self._handle_confirmation(input_text)
-            
-            if is_confirmed and confirmed_choice:
-                # 用户确认了一个选择，处理该选择
-                return self.process_user_choice(confirmed_choice)
-            elif not is_confirmed:
-                # 用户拒绝确认，返回当前场景并重置确认状态
-                self.game_state.awaiting_confirmation = False
-                self.game_state.confirmation_choices = []
-                
-                # 生成一个新的对话，提示用户提供更明确的回答
-                clarification_message = "好的，请你更清楚地表达你想做什么。"
-                response_data = self.get_current_scene_data()
-                response_data["dialogue"] = clarification_message
-                return response_data
-        
-        # 不在确认状态或确认失败，尝试匹配选项
         # 过滤出符合条件的选项
         available_choices = [
             choice for choice in current_scene.choices 
@@ -344,53 +315,50 @@ class GameManager:
             return {"error": "No available choices in current scene"}
         
         # 使用大模型匹配用户意图
-        match_result = await self._match_intent_with_llm(input_text, available_choices)
+        match_result = await self._match_intent_with_llm(input_text, current_scene.initial_dialogue, available_choices)
         
         if match_result.confidence >= self.intent_threshold:
             # 匹配度足够高，直接处理选择
             return self.process_user_choice(match_result.choice_id)
         else:
-            # 匹配度不够，需要确认
-            options_text = ", ".join([f'"{choice.text}"' for choice in available_choices])
-            
-            # 构建确认对话
-            confirmation_text = current_scene.confirmation_dialogue.format(options=options_text)
-            
-            # 设置确认状态
-            self.game_state.awaiting_confirmation = True
-            self.game_state.confirmation_choices = [choice.choice_id for choice in available_choices]
-            
-            # 返回确认场景
+            # 匹配度不够，使用大模型生成的对话回应
             response_data = self.get_current_scene_data()
-            response_data["dialogue"] = confirmation_text
-            response_data["awaiting_confirmation"] = True
+            response_data["dialogue"] = match_result.dialogue_response
             return response_data
     
     class MatchResult:
         def __init__(self, choice_id: str, confidence: float):
             self.choice_id = choice_id
             self.confidence = confidence
+            self.dialogue_response = ""  # 添加对话回应字段
     
-    async def _match_intent_with_llm(self, input_text: str, choices: List[StoryChoice]) -> MatchResult:
+    async def _match_intent_with_llm(self, input_text: str, initial_dialogue: str, choices: List[StoryChoice]) -> MatchResult:
         """使用大模型匹配用户意图"""
         if not choices:
             return self.MatchResult("", 0.0)
             
         # 构建提示词
         prompt = f"""
-我正在玩一个交互式故事游戏，当前场景有以下选项：
+当前场景的初始对话是：
+{initial_dialogue}
 
+当前场景有以下选项：
 {chr(10).join([f"{i+1}. {choice.text}" for i, choice in enumerate(choices)])}
 
-用户的输入是: "{input_text}"
+玩家的输入是: "{input_text}"
 
-分析用户输入最可能对应哪个选项。考虑用户输入的语义、意图和关键词，而不仅仅是字面匹配。
-首先分析用户输入的意图，然后确定最匹配的选项，并给出0到1之间的匹配置信度分数。
+请分析玩家的输入最可能对应哪个选项。考虑玩家输入的语义、意图和关键词，而不仅仅是字面匹配。
+首先分析玩家输入的意图，然后确定最匹配的选项，并给出0到1之间的匹配置信度分数。
+
+如果玩家输入与任何选项的匹配度都不高（低于0.6），请生成一个自然的对话回应，继续当前的话题。
 
 输出格式：
-选项: [选项编号]
-置信度: [0.0-1.0之间的数值]
 分析: [简短分析]
+场景选项: [选项编号，必须是1到{len(choices)}之间的整数]
+置信度: [0.0-1.0之间的数值]
+对话回应: [如果匹配度低，生成一个自然的对话回应]
+
+注意：选项编号必须是一个整数，对应上面列出的选项编号。
 """
         
         try:
@@ -413,24 +381,33 @@ class GameManager:
             
             logger.info(f"LLM intent matching response: {response_text}")
             
-            # TODO: 返回文本结构化
-            # 解析回复，提取选项编号和置信度
-            option_match = re.search(r'选项: (\d+)', response_text)
-            confidence_match = re.search(r'置信度: (0\.\d+|1\.0|1)', response_text)
-            analysis_match = re.search(r'分析: (.*?)(?:\n|$)', response_text, re.DOTALL)
+            # 解析回复，提取选项编号、置信度和对话回应
+            # 使用更灵活的正则表达式来匹配可能的格式
+            option_match = re.search(r'选项:?\s*(\d+)', response_text)
+            confidence_match = re.search(r'置信度:?\s*(0\.\d+|1\.0|1)', response_text)
+            analysis_match = re.search(r'分析:?\s*(.*?)(?:\n|$)', response_text, re.DOTALL)
+            dialogue_match = re.search(r'对话回应:?\s*(.*?)(?:\n|$)', response_text, re.DOTALL)
             
             option_index = -1
             confidence = 0.0
             analysis = ""
+            dialogue_response = ""
             
             if option_match:
                 option_index = int(option_match.group(1))
+                logger.info(f"Matched option index: {option_index}")
             
             if confidence_match:
                 confidence = float(confidence_match.group(1))
+                logger.info(f"Matched confidence: {confidence}")
                 
             if analysis_match:
                 analysis = analysis_match.group(1).strip()
+                logger.info(f"Matched analysis: {analysis}")
+                
+            if dialogue_match:
+                dialogue_response = dialogue_match.group(1).strip()
+                logger.info(f"Matched dialogue response: {dialogue_response}")
             
             # 构造并发送调试信息
             debug_info = {
@@ -438,24 +415,36 @@ class GameManager:
                 "intent_match": {
                     "option_index": option_index,
                     "confidence": confidence,
-                    "analysis": analysis
+                    "analysis": analysis,
+                    "dialogue_response": dialogue_response
                 }
             }
             
+            # 如果成功解析了选项和置信度
             if option_match and confidence_match:
-                option_index = int(option_match.group(1)) - 1
+                option_index = int(option_match.group(1)) - 1  # 转换为0-based索引
                 confidence = float(confidence_match.group(1))
                 
+                # 检查选项索引是否有效
                 if 0 <= option_index < len(choices):
-                    return self.MatchResult(choices[option_index].choice_id, confidence)
+                    result = self.MatchResult(choices[option_index].choice_id, confidence)
+                    result.dialogue_response = dialogue_response
+                    return result
+                else:
+                    logger.warning(f"Invalid option index: {option_index}, choices length: {len(choices)}")
             
-            # 如果解析失败，使用备用方法
-            return self._match_intent_fallback(input_text, choices)
+            # 如果解析失败或选项索引无效，使用备用方法
+            logger.info("Using fallback method for intent matching")
+            fallback_result = self._match_intent_fallback(input_text, choices)
+            fallback_result.dialogue_response = dialogue_response or "我理解你想继续对话。让我们继续当前的话题吧。"
+            return fallback_result
             
         except Exception as e:
             logger.error(f"Error in LLM intent matching: {e}")
             # 错误时使用备用方法
-            return self._match_intent_fallback(input_text, choices)
+            fallback_result = self._match_intent_fallback(input_text, choices)
+            fallback_result.dialogue_response = "我理解你想继续对话。让我们继续当前的话题吧。"
+            return fallback_result
     
     def _match_intent_fallback(self, input_text: str, choices: List[StoryChoice]) -> MatchResult:
         """当LLM匹配失败时，使用备用的关键词和相似度匹配"""
@@ -500,97 +489,3 @@ class GameManager:
         # 缓存结果
         self.similarity_cache[cache_key] = similarity
         return similarity
-    
-    async def _handle_confirmation(self, input_text: str) -> Tuple[bool, Optional[str]]:
-        """处理用户对确认的回复"""
-        if not self.game_state.confirmation_choices:
-            return False, None
-            
-        # 构建提示词
-        current_scene = self.story_data.scenes.get(self.game_state.current_scene_id)
-        available_choices = [
-            choice for choice in current_scene.choices 
-            if choice.choice_id in self.game_state.confirmation_choices
-        ]
-        
-        choice_texts = [f"{i+1}. {choice.text}" for i, choice in enumerate(available_choices)]
-        
-        prompt = f"""
-用户正在玩交互式故事游戏，系统询问用户是否想选择以下选项之一：
-
-{chr(10).join(choice_texts)}
-
-用户的回复是："{input_text}"
-
-请判断：
-1. 用户是否肯定想选择其中一个选项？如果是，是哪个选项（给出编号）？
-2. 还是用户是否否定了所有选项，表示这些都不是他想要的？
-3. 或者用户的回复是否模糊不清，无法确定？
-
-输出格式：
-结果: [肯定/否定/模糊]
-选项编号: [如果是肯定，给出选项编号，否则为0]
-"""
-        
-        try:
-            # 使用自定义的方式向LLM模型发送请求
-            from ..agent.input_types import TextData, TextSource, BatchInput
-            
-            # 创建输入对象
-            input_data = BatchInput(
-                texts=[TextData(source=TextSource.INPUT, content=prompt)]
-            )
-            
-            # 调用LLM模型
-            agent_engine = self.service_context.agent_engine
-            response_text = ""
-            
-            # 收集LLM输出的所有token
-            async for response in agent_engine.chat(input_data):
-                if hasattr(response, 'tts_text'):
-                    response_text += response.tts_text
-            
-            logger.info(f"LLM confirmation response: {response_text}")
-            
-            # TODO: 返回文本结构化
-            # 解析回复
-            result_match = re.search(r'结果: (肯定|否定|模糊)', response_text)
-            option_match = re.search(r'选项编号: (\d+)', response_text)
-            
-            result_text = "模糊"
-            option_index = 0
-            
-            if result_match:
-                result_text = result_match.group(1)
-                
-            if option_match:
-                option_index = int(option_match.group(1))
-                
-            # 调试信息
-            debug_info = {
-                "confirmation_prompt": prompt,
-                "llm_response": response_text,
-                "confirmation_result": {
-                    "result": result_text,
-                    "option_index": option_index
-                }
-            }
-            
-            if result_match and option_match:
-                result = result_match.group(1)
-                option_index = int(option_match.group(1))
-                
-                if result == "肯定" and 1 <= option_index <= len(available_choices):
-                    # 用户确认了一个选项
-                    choice_id = available_choices[option_index-1].choice_id
-                    return True, choice_id
-                elif result == "否定":
-                    # 用户否定了所有选项
-                    return False, None
-            
-            # 默认为模糊
-            return False, None
-            
-        except Exception as e:
-            logger.error(f"Error in confirmation handling: {e}")
-            return False, None
