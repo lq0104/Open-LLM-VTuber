@@ -1,5 +1,6 @@
 import asyncio
 import re
+import time
 from typing import Optional, Union, Any, List, Dict
 import numpy as np
 import json
@@ -149,7 +150,10 @@ async def process_user_input(
     """Process user input, converting audio to text if needed"""
     if isinstance(user_input, np.ndarray):
         logger.info("Transcribing audio input...")
+        start_time = time.time()
         input_text = await asr_engine.async_transcribe_np(user_input)
+        end_time = time.time()
+        logger.info(f"🔊 Transcribing audio input took {end_time - start_time} seconds")
         await websocket_send(
             json.dumps({"type": "user-input-transcription", "text": input_text})
         )

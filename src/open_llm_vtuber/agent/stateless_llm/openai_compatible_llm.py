@@ -72,6 +72,7 @@ class AsyncLLM(StatelessLLMInterface):
         """
         logger.debug(f"Messages: {messages}")
         stream = None
+        last_chunk = None
         try:
             # If system prompt is provided, add it to the messages
             messages_with_system = messages
@@ -93,7 +94,32 @@ class AsyncLLM(StatelessLLMInterface):
                 if chunk.choices[0].delta.content is None:
                     chunk.choices[0].delta.content = ""
                 yield chunk.choices[0].delta.content
-
+                last_chunk = chunk
+            
+            # 检查是否是DeepSeek模型并统计token
+            if 'deepseek' in self.model.lower() and last_chunk is not None:
+                try:
+                    # 尝试从最后一个响应块中获取token统计信息
+                    if hasattr(last_chunk, 'usage'):
+                        usage = last_chunk.usage
+                        completion_tokens = usage.completion_tokens
+                        prompt_tokens = usage.prompt_tokens
+                        prompt_cache_hit_tokens = usage.prompt_cache_hit_tokens
+                        prompt_cache_miss_tokens = usage.prompt_cache_miss_tokens
+                        total_tokens = usage.total_tokens
+                        
+                        # 保存token统计信息到实例变量，以便其他地方可以访问
+                        self.last_completion_tokens = completion_tokens
+                        self.last_prompt_tokens = prompt_tokens
+                        self.last_prompt_cache_hit_tokens = prompt_cache_hit_tokens
+                        self.last_prompt_cache_miss_tokens = prompt_cache_miss_tokens
+                        self.last_total_tokens = total_tokens
+                        
+                        logger.info(f"DeepSeek token stats: completion={completion_tokens}, prompt={prompt_tokens}, "
+                                   f"cache_hit={prompt_cache_hit_tokens}, cache_miss={prompt_cache_miss_tokens}, "
+                                   f"total={total_tokens}")
+                except Exception as e:
+                    logger.error(f"Error getting DeepSeek token stats: {e}")
         except APIConnectionError as e:
             logger.error(
                 f"Error calling the chat endpoint: Connection error. Failed to connect to the LLM API. \nCheck the configurations and the reachability of the LLM backend. \nSee the logs for details. \nTroubleshooting with documentation: https://open-llm-vtuber.github.io/docs/faq#%E9%81%87%E5%88%B0-error-calling-the-chat-endpoint-%E9%94%99%E8%AF%AF%E6%80%8E%E4%B9%88%E5%8A%9E \n{e.__cause__}"

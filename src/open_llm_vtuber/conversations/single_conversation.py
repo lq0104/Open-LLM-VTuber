@@ -165,11 +165,6 @@ async def process_agent_response(
                     translate_engine=context.translate_engine,
                 )
                 
-                # # 如果有选项，添加到响应中
-                # if "choices" in response_data:
-                #     choices_text = "\n".join([f"{i+1}. {choice['text']}" for i, choice in enumerate(response_data["choices"])])
-                #     response_text += f"\n\n{choices_text}"
-                
                 return full_response
         
         # 非故事模式或故事模式处理失败，使用默认处理

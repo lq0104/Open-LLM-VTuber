@@ -348,17 +348,13 @@ class GameManager:
 玩家的输入是: "{input_text}"
 
 请分析玩家的输入最可能对应哪个选项。考虑玩家输入的语义、意图和关键词，而不仅仅是字面匹配。
-首先分析玩家输入的意图，然后确定最匹配的选项，并给出0到1之间的匹配置信度分数。
 
-如果玩家输入与任何选项的匹配度都不高（低于0.6），请生成一个自然的对话回应，继续当前的话题。
+如果玩家输入与某个选项的匹配度很高，只需输出该选项的编号（1到{len(choices)}之间的整数）。
+如果玩家输入与任何选项的匹配度都不高，请生成一个自然的对话回应，继续当前的话题。
 
 输出格式：
-分析: [简短分析]
-场景选项: [选项编号，必须是1到{len(choices)}之间的整数]
-置信度: [0.0-1.0之间的数值]
+场景选项: [选项编号，必须是1到{len(choices)}之间的整数，如果匹配度高]
 对话回应: [如果匹配度低，生成一个自然的对话回应]
-
-注意：选项编号必须是一个整数，对应上面列出的选项编号。
 """
         
         try:
@@ -374,36 +370,26 @@ class GameManager:
             agent_engine = self.service_context.agent_engine
             response_text = ""
             
+            start_time = time.time()
             # 收集LLM输出的所有token
             async for response in agent_engine.chat(input_data):
                 if hasattr(response, 'tts_text'):
                     response_text += response.tts_text
-            
+            end_time = time.time()
+            logger.info(f"🔊 LLM intent matching response took {end_time - start_time} seconds")
             logger.info(f"LLM intent matching response: {response_text}")
             
-            # 解析回复，提取选项编号、置信度和对话回应
+            # 解析回复，提取选项编号和对话回应
             # 使用更灵活的正则表达式来匹配可能的格式
-            option_match = re.search(r'选项:?\s*(\d+)', response_text)
-            confidence_match = re.search(r'置信度:?\s*(0\.\d+|1\.0|1)', response_text)
-            analysis_match = re.search(r'分析:?\s*(.*?)(?:\n|$)', response_text, re.DOTALL)
+            option_match = re.search(r'场景选项:?\s*(\d+)', response_text)
             dialogue_match = re.search(r'对话回应:?\s*(.*?)(?:\n|$)', response_text, re.DOTALL)
             
             option_index = -1
-            confidence = 0.0
-            analysis = ""
             dialogue_response = ""
             
             if option_match:
                 option_index = int(option_match.group(1))
                 logger.info(f"Matched option index: {option_index}")
-            
-            if confidence_match:
-                confidence = float(confidence_match.group(1))
-                logger.info(f"Matched confidence: {confidence}")
-                
-            if analysis_match:
-                analysis = analysis_match.group(1).strip()
-                logger.info(f"Matched analysis: {analysis}")
                 
             if dialogue_match:
                 dialogue_response = dialogue_match.group(1).strip()
@@ -414,20 +400,18 @@ class GameManager:
                 "llm_response": response_text,
                 "intent_match": {
                     "option_index": option_index,
-                    "confidence": confidence,
-                    "analysis": analysis,
                     "dialogue_response": dialogue_response
                 }
             }
             
-            # 如果成功解析了选项和置信度
-            if option_match and confidence_match:
+            # 如果成功解析了选项
+            if option_match:
                 option_index = int(option_match.group(1)) - 1  # 转换为0-based索引
-                confidence = float(confidence_match.group(1))
                 
                 # 检查选项索引是否有效
                 if 0 <= option_index < len(choices):
-                    result = self.MatchResult(choices[option_index].choice_id, confidence)
+                    # 如果匹配到选项，设置较高的置信度
+                    result = self.MatchResult(choices[option_index].choice_id, 0.8)
                     result.dialogue_response = dialogue_response
                     return result
                 else:
