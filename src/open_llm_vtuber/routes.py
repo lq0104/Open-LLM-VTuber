@@ -7,7 +7,7 @@ from starlette.websockets import WebSocketDisconnect
 from loguru import logger
 from .service_context import ServiceContext
 from .websocket_handler import WebSocketHandler
-
+import re
 
 def init_client_ws_route(default_context_cache: ServiceContext) -> APIRouter:
     """
@@ -146,6 +146,8 @@ def init_webtool_routes(default_context_cache: ServiceContext) -> APIRouter:
                 try:
                     # Generate and send audio for each sentence
                     for sentence in sentences:
+                        # 过滤掉[emotion]格式的字符串
+                        sentence = re.sub(r'\[[a-zA-Z]+\]', '', sentence).strip()
                         sentence = sentence + "."  # Add back the period
                         file_name = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{str(uuid4())[:8]}"
                         audio_path = (

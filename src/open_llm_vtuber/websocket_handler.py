@@ -27,8 +27,9 @@ from .conversations.conversation_handler import (
     handle_group_interrupt,
     handle_individual_interrupt,
 )
-
-
+from .agent.output_types import SentenceOutput, Actions, DisplayText
+from .conversations.conversation_utils import process_agent_output
+from .conversations.tts_manager import TTSTaskManager
 class MessageType(Enum):
     """Enum for WebSocket message types"""
 
@@ -165,6 +166,32 @@ class WebSocketHandler:
                 }
             )
         )
+
+        # 发送初始场景背景
+        background = session_service_context.current_scene_data.get("background", "")
+        if background:
+            await websocket.send_text(
+                json.dumps({"type": "switch-background", "background_name": background})
+            )
+            logger.info(f"🖼️ 发送初始场景背景: {background} 给客户端 {client_uid}")
+
+        # 构建完整的响应文本
+        response_text = session_service_context.current_scene_data.get("dialogue", "")
+        dialogue_response = SentenceOutput(
+            display_text=DisplayText(text=response_text),
+            tts_text=response_text,
+            actions=Actions()
+        )
+        full_response = await process_agent_output(
+            output=dialogue_response,
+            character_config=session_service_context.character_config,
+            live2d_model=session_service_context.live2d_model,
+            tts_engine=session_service_context.tts_engine,
+            websocket_send=websocket.send_text,
+            tts_manager=TTSTaskManager(),
+            translate_engine=session_service_context.translate_engine,
+        )
+        logger.info(f"🔊 发送初始场景对话: {response_text} 给客户端 {client_uid}")
 
         # Send initial group status
         await self.send_group_update(websocket, client_uid)

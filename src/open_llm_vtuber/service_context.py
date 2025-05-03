@@ -50,18 +50,17 @@ class ServiceContext:
         # translate_engine can be none if translation is disabled
         self.vad_engine: VADInterface | None = None
         self.translate_engine: TranslateInterface | None = None        
+        
+        # 游戏模式，默认为story
+        self.game_mode: str = "story"      
         # 初始化故事管理器
         self.game_manager = GameManager(self)
+        # 当前场景数据
+        self.current_scene_data: Dict = {}
         # 默认加载example_story.yaml
         if os.path.exists("stories/example_story.yaml"):
             self.game_manager.load_story("example_story.yaml")
-            self.game_manager.start_game()
-
-        
-        # 游戏模式，默认为story
-        self.game_mode: str = "story"
-        # 当前场景数据
-        self.current_scene_data: Dict = {}
+            self.current_scene_data = self.game_manager.start_game()
 
         # the system prompt is a combination of the persona prompt and live2d expression prompt
         self.system_prompt: str = None
