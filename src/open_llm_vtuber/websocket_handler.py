@@ -92,6 +92,7 @@ class WebSocketHandler:
             "fetch-configs": self._handle_fetch_configs,
             "switch-config": self._handle_config_switch,
             "fetch-backgrounds": self._handle_fetch_backgrounds,
+            "switch-background": self._handle_switch_background,
             "audio-play-start": self._handle_audio_play_start,
         }
 
@@ -336,6 +337,50 @@ class WebSocketHandler:
                 )
             )
 
+    async def send_background_change(self, client_uid: str, background_name: str) -> bool:
+        """
+        Send a command to change the background to a specific client
+        
+        Args:
+            client_uid: Target client's unique ID
+            background_name: Name of the background file to switch to
+            
+        Returns:
+            bool: Success status
+        """
+        if client_uid not in self.client_connections:
+            logger.warning(f"Cannot send background change: client {client_uid} not connected")
+            return False
+            
+        websocket = self.client_connections[client_uid]
+        try:
+            await websocket.send_text(
+                json.dumps({"type": "switch-background", "background_name": background_name})
+            )
+            logger.info(f"Sent background change command to client {client_uid}: {background_name}")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to send background change command: {e}")
+            return False
+
+    async def broadcast_background_change(self, background_name: str, exclude_uid: str = None) -> None:
+        """
+        Broadcast background change to all connected clients
+        
+        Args:
+            background_name: Name of the background file to switch to
+            exclude_uid: Optional client UID to exclude from broadcast
+        """
+        message = {"type": "switch-background", "background_name": background_name}
+        for uid, websocket in self.client_connections.items():
+            if exclude_uid and uid == exclude_uid:
+                continue
+                
+            try:
+                await websocket.send_text(json.dumps(message))
+            except Exception as e:
+                logger.error(f"Failed to broadcast background change to {uid}: {e}")
+
     async def _handle_interrupt(
         self, websocket: WebSocket, client_uid: str, data: WSMessage
     ) -> None:
@@ -525,6 +570,31 @@ class WebSocketHandler:
         await websocket.send_text(
             json.dumps({"type": "background-files", "files": bg_files})
         )
+
+    async def _handle_switch_background(
+        self, websocket: WebSocket, client_uid: str, data: WSMessage
+    ) -> None:
+        """Handle switching background image"""
+        bg_name = data.get("background_name")
+        if not bg_name:
+            await websocket.send_text(
+                json.dumps({"type": "error", "message": "Background name not provided"})
+            )
+            return
+
+        # 检查背景图片是否存在
+        bg_files = scan_bg_directory()
+        if bg_name not in bg_files:
+            await websocket.send_text(
+                json.dumps({"type": "error", "message": f"Background '{bg_name}' not found"})
+            )
+            return
+
+        # 发送切换背景的指令
+        await websocket.send_text(
+            json.dumps({"type": "switch-background", "background_name": bg_name})
+        )
+        logger.info(f"Sent switch background command for {bg_name} to client {client_uid}")
 
     async def _handle_audio_play_start(
         self, websocket: WebSocket, client_uid: str, data: WSMessage

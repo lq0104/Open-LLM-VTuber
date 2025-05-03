@@ -1,4 +1,4 @@
-title: 神秘森林的秘密
+title: mystery_forest_secret
 author: Open-LLM-VTuber
 description: 探索一个充满魔法和谜题的神秘森林，寻找失落的宝藏。
 start_scene: forest_entrance
@@ -70,7 +70,7 @@ scenes:
       - 我是不小心进来的，能帮我找到出去的路吗
       - 我不是故意进入这个森林的，我只是迷失了方向
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/forest_entrance.png
+    background: backgrounds/mystery_forest_secret_forest_entrance.png
   guide_out:
     initial_dialogue: '[surprised]哦，看起来你并不是有意来到这里的。
 
@@ -117,7 +117,7 @@ scenes:
       - 算了吧，我还是想出去
       - 谢谢，但我想尽快回去
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/guide_out.png
+    background: backgrounds/mystery_forest_secret_guide_out.png
   forest_path:
     initial_dialogue: '沿着这条小路前进，你会发现森林的秘密。
 
@@ -164,7 +164,7 @@ scenes:
       - 我对水域比较感兴趣
       - 湖泊可能会有意想不到的发现，我想去那里
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/forest_path.png
+    background: backgrounds/mystery_forest_secret_forest_path.png
   ancient_temple:
     initial_dialogue: '你来到了一座古老的神庙前，门口站着一位白发少女。
 
@@ -216,7 +216,7 @@ scenes:
       - 是某种动物吗？
       - 我猜是某种家具？
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/ancient_temple.png
+    background: backgrounds/mystery_forest_secret_ancient_temple.png
   temple_refused:
     initial_dialogue: '[sad]"很遗憾，你的答案不正确。"
 
@@ -261,7 +261,7 @@ scenes:
       - 这个太难了，我先去别的地方看看
       - 不再尝试了，我要去湖泊
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/temple_refused.png
+    background: backgrounds/mystery_forest_secret_temple_refused.png
   temple_interior:
     initial_dialogue: '[happy]"恭喜你，回答正确！"
 
@@ -312,7 +312,7 @@ scenes:
       - 让我先去湖泊那边
       - 神庙钥匙可能不好找，先去湖泊试试
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/temple_interior.png
+    background: backgrounds/mystery_forest_secret_temple_interior.png
   find_temple_key:
     initial_dialogue: '你仔细搜索神庙，在一尊古老雕像的底座找到了一把黄金钥匙。
 
@@ -343,7 +343,7 @@ scenes:
       - 该去湖泊了
       - 继续我的探索，前往湖泊
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/find_temple_key.png
+    background: backgrounds/mystery_forest_secret_find_temple_key.png
   mystic_lake:
     initial_dialogue: '你来到一个宁静的湖泊边，湖水清澈见底，倒映着天空。
 
@@ -411,7 +411,7 @@ scenes:
       - 我需要去神庙寻找钥匙
       - 我想我应该先去神庙一趟
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/mystic_lake.png
+    background: backgrounds/mystery_forest_secret_mystic_lake.png
   lake_chat:
     initial_dialogue: '[happy]"很高兴能有人陪我聊天。这个湖泊虽然美丽，但有时也很孤独。"
 
@@ -479,7 +479,7 @@ scenes:
       - 我想感受一下湖水的温度，可以吗？
       - 能否让我在这美丽的湖中畅游？
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/lake_chat.png
+    background: backgrounds/mystery_forest_secret_lake_chat.png
   lake_swim:
     initial_dialogue: '[surprised]"你想在湖里游泳？当然可以，这湖水有净化心灵的功效。"
 
@@ -524,7 +524,7 @@ scenes:
       - 湖底可能有危险，我还是上岸吧
       - 我游累了，想回到岸上
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/lake_swim.png
+    background: backgrounds/mystery_forest_secret_lake_swim.png
   lake_discovery:
     initial_dialogue: '你潜入湖底，发现一个小盒子嵌在岩石中。你设法将它取出。
 
@@ -554,7 +554,7 @@ scenes:
       - 我准备回答问题，打开盒子
       - 我要打开这个小盒子
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/lake_discovery.png
+    background: backgrounds/mystery_forest_secret_lake_discovery.png
   lake_riddle:
     initial_dialogue: '[serious]"要获得湖泊的钥匙，你需要回答我的问题。"
 
@@ -600,7 +600,7 @@ scenes:
       - 可能是时间？
       - 光或者影子？
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/lake_riddle.png
+    background: backgrounds/mystery_forest_secret_lake_riddle.png
   lake_wrong:
     initial_dialogue: '[sad]"很遗憾，这不是正确答案。"
 
@@ -645,7 +645,7 @@ scenes:
       - 我想回到森林路口重新选择
       - 先离开一下，思考清楚再回来
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/lake_wrong.png
+    background: backgrounds/mystery_forest_secret_lake_wrong.png
   get_lake_key:
     initial_dialogue: '[happy]"答对了！风，无形却有力，就像智慧一样。"
 
@@ -700,7 +700,7 @@ scenes:
       - 还缺一把神庙钥匙，我去拿一下
       - 先去神庙找到黄金钥匙再回来
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/get_lake_key.png
+    background: backgrounds/mystery_forest_secret_get_lake_key.png
   treasure_gate:
     initial_dialogue: '志津久带你来到森林深处的一个古老石门前。
 
@@ -748,7 +748,7 @@ scenes:
       - 我不确定自己准备好了没有
       - 我有点害怕，让我再思考一下
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/treasure_gate.png
+    background: backgrounds/mystery_forest_secret_treasure_gate.png
   treasure_room:
     initial_dialogue: '门缓缓打开，里面不是金银财宝，而是一本古老的书和一面镜子。
 
@@ -818,7 +818,7 @@ scenes:
       - 友谊比任何宝物都重要
       - 我想和你们建立长久的友谊关系
     is_end_scene: false
-    background: backgrounds/神秘森林的秘密/treasure_room.png
+    background: backgrounds/mystery_forest_secret_treasure_room.png
   ending_wizard:
     initial_dialogue: '[joy]"你选择了知识的力量！"
 
@@ -838,7 +838,7 @@ scenes:
     is_end_scene: true
     achievements:
     - 魔法学徒
-    background: backgrounds/神秘森林的秘密/ending_wizard.png
+    background: backgrounds/mystery_forest_secret_ending_wizard.png
   ending_reflection:
     initial_dialogue: '[calm]"你选择了自我认知。"
 
@@ -860,7 +860,7 @@ scenes:
     is_end_scene: true
     achievements:
     - 寻找真我
-    background: backgrounds/神秘森林的秘密/ending_reflection.png
+    background: backgrounds/mystery_forest_secret_ending_reflection.png
   ending_friendship:
     initial_dialogue: '志津久惊讶地看着你，然后露出温暖的笑容。
 
@@ -884,7 +884,7 @@ scenes:
     is_end_scene: true
     achievements:
     - 友谊大师
-    background: backgrounds/神秘森林的秘密/ending_friendship.png
+    background: backgrounds/mystery_forest_secret_ending_friendship.png
   ending_left:
     initial_dialogue: '[calm]"我理解你想回家的心情。"
 
@@ -906,4 +906,4 @@ scenes:
       '
     choices: []
     is_end_scene: true
-    background: backgrounds/神秘森林的秘密/ending_left.png
+    background: backgrounds/mystery_forest_secret_ending_left.png

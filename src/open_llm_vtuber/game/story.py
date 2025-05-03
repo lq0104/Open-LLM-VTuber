@@ -26,6 +26,7 @@ class StoryScene(BaseModel):
     conditions: Dict[str, Any] = Field(default_factory=dict)  # 场景触发条件
     achievements: List[str] = Field(default_factory=list)  # 可获得的成就
     is_end_scene: bool = False  # 是否为结束场景
+    background: Optional[str] = None  # 场景背景图像路径
 
 class GameState(BaseModel):
     current_scene_id: str
@@ -116,7 +117,8 @@ class GameManager:
                     choices=choices,
                     conditions=scene_data.get('conditions', {}),
                     achievements=scene_data.get('achievements', []),
-                    is_end_scene=scene_data.get('is_end_scene', False)
+                    is_end_scene=scene_data.get('is_end_scene', False),
+                    background=scene_data.get('background', None)
                 )
             
             self.story_data = StoryData(
@@ -186,6 +188,9 @@ class GameManager:
             "choices": available_choices,
             "is_end_scene": scene.is_end_scene
         }
+        
+        if scene.background and os.path.exists(scene.background):
+            response_data["background"] = os.path.basename(scene.background)
             
         return response_data
         

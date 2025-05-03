@@ -76,7 +76,7 @@ class AudioOutput(BaseOutput):
         """Iterate through audio segments and their actions"""
         yield self.audio_path, self.display_text, self.transcript, self.actions
 
-#TODO: 背景切换的类
+
 @dataclass
 class BackgroundOutput(BaseOutput):
     """Output type for background switching"""

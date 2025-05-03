@@ -49,7 +49,7 @@ def main():
     story_title = story.get('title', 'Unknown Story')
     
     # 确保backgrounds目录存在
-    os.makedirs(f'backgrounds/{story_title}', exist_ok=True)
+    os.makedirs(f'backgrounds', exist_ok=True)
     
     # 处理每个场景
     scenes = story.get('scenes', {})
@@ -64,7 +64,7 @@ def main():
         prompt = create_prompt_for_scene(scene_id, scene_data, story_title)
         
         # 设置输出文件名
-        output_file = f"backgrounds/{story_title}/{scene_id}"
+        output_file = f"backgrounds/{story_title}_{scene_id}"
         
         print(f"正在为场景 '{scene_id}' 生成背景图像...")
         print(f"提示: {prompt}")

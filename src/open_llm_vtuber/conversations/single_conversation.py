@@ -147,6 +147,13 @@ async def process_agent_response(
             if isinstance(response_data, dict):
                 # 更新当前场景数据
                 context.current_scene_data = response_data
+     
+                background_path = response_data.get("background", "")
+                if background_path:
+                    await websocket_send(
+                        json.dumps({"type": "switch-background", "background_name": background_path})
+                    )
+                    logger.info(f"🖼️ Background changed to: {background_path}")
                 
                 # 构建完整的响应文本
                 response_text = response_data.get("dialogue", "")
