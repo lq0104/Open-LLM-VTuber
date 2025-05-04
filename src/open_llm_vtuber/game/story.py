@@ -46,6 +46,7 @@ class StoryData(BaseModel):
     description: str = ""
     scenes: Dict[str, StoryScene]
     start_scene: str
+    system_prompt: str = ""  # 系统提示词，用于指导大模型的行为
     
 class GameManager:
     def __init__(self, service_context):
@@ -126,7 +127,8 @@ class GameManager:
                 author=story_data_dict.get('author', 'Anonymous'),
                 description=story_data_dict.get('description', ''),
                 scenes=scenes,
-                start_scene=story_data_dict.get('start_scene', list(scenes.keys())[0])
+                start_scene=story_data_dict.get('start_scene', list(scenes.keys())[0]),
+                system_prompt=story_data_dict.get('system_prompt', '')  # 加载系统提示词
             )
             return True
         except Exception as e:

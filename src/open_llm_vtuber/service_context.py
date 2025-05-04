@@ -223,7 +223,14 @@ class ServiceContext:
             logger.debug("Agent already initialized with the same config.")
             return
 
-        system_prompt = self.construct_system_prompt(persona_prompt)
+        # 检查game_manager中的story_data.system_prompt是否非空，如果非空则使用该system_prompt
+        if (self.game_manager and 
+            self.game_manager.story_data and 
+            self.game_manager.story_data.system_prompt):
+            logger.info("使用故事中的system_prompt")
+            system_prompt = self.game_manager.story_data.system_prompt
+        else:
+            system_prompt = self.construct_system_prompt(persona_prompt)
 
         # Pass avatar to agent factory
         avatar = self.character_config.avatar or ""  # Get avatar from config
