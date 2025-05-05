@@ -150,11 +150,10 @@ class ServiceContext:
         # init vad from character config
         self.init_vad(config.character_config.vad_config)
 
-        # TODO: 游戏模式下，使用story_persona_prompt
         # init agent from character config
         self.init_agent(
             config.character_config.agent_config,
-            config.character_config.story_persona_prompt,
+            config.character_config.persona_prompt,
         )
 
         self.init_translate(
@@ -309,7 +308,7 @@ class ServiceContext:
                     "[<insert_emomap_keys>]", self.live2d_model.emo_str
                 )
 
-            # persona_prompt += prompt_content
+            persona_prompt += prompt_content
 
         logger.debug("\n === System Prompt ===")
         logger.debug(persona_prompt)

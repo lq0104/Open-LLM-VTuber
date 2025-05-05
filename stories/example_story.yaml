@@ -1,6 +1,12 @@
 title: mystery_forest_secret
 author: Open-LLM-VTuber
 system_prompt: "你是一个神秘森林的守护者，性格温和但充满智慧。你说话时应该保持神秘感，但也要友善。你的语气应该像一位引导者，帮助旅行者探索森林的秘密。当旅行者做出选择时，你应该给出适当的回应，但不要透露太多信息。记住，保持神秘感很重要，但也要确保旅行者感到安全和被引导。"
+# story_persona_prompt: |
+#   你是一个互动故事游戏中的角色。你的职责是理解玩家的意图并自然地回应。
+#   你应该在回应中保持角色的个性和故事的氛围。
+#   当玩家的输入与可用选项不明确匹配时，生成一个自然的对话回应，继续当前话题。
+#   你的回应应该具有沉浸感、吸引力，并与故事的背景和你的角色个性保持一致。
+#   始终保持角色形象，维持故事的叙事流程。
 description: 探索一个充满魔法和谜题的神秘森林，寻找失落的宝藏。
 start_scene: forest_entrance
 scenes:
@@ -72,6 +78,7 @@ scenes:
       - 我不是故意进入这个森林的，我只是迷失了方向
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_forest_entrance.png
+    background_gen_prompt: "神秘森林入口，魔幻风格。一条幽深的小路通向森林深处，周围是高大古老的树木，阳光透过树叶形成光斑。有些发着微光的蘑菇和植物，青绿色女性守护者志津久站在路口迎接旅行者，她有着温和智慧的表情。场景氛围神秘而不恐怖，充满魔法感。细节精美，光影效果突出。"
   guide_out:
     initial_dialogue: '[surprised]哦，看起来你并不是有意来到这里的。
 
@@ -119,6 +126,7 @@ scenes:
       - 谢谢，但我想尽快回去
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_guide_out.png
+    background_gen_prompt: "森林边缘的场景，绿发女性守护者志津久正在向一位迷路的旅行者指引方向。画面上有两条路，一条通向森林外的村庄，另一条通向森林深处的神秘区域。周围环境魔幻而美丽，有些发光的植物和飞舞的光点。守护者表情友善但神秘，天色暗一些但不阴暗，营造出选择的氛围。细节精美，光影效果突出。"
   forest_path:
     initial_dialogue: '沿着这条小路前进，你会发现森林的秘密。
 
@@ -166,6 +174,7 @@ scenes:
       - 湖泊可能会有意想不到的发现，我想去那里
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_forest_path.png
+    background_gen_prompt: "神秘森林中的分岔路，魔幻风格。画面中央是一条森林小径分成两条路：左边通向古老神庙的路径上有些古老的石柱和落叶，右边通向湖泊的路径有些蓝色的光点和水汽。绿发女性守护者志津久站在分岔路口，微笑着等待旅行者做出选择。森林充满魔法氛围，有发光植物和飞舞的光粒子。细节精美，光影效果突出。"
   ancient_temple:
     initial_dialogue: '你来到了一座古老的神庙前，门口站着一位白发少女。
 
@@ -218,6 +227,7 @@ scenes:
       - 我猜是某种家具？
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_ancient_temple.png
+    background_gen_prompt: "古老神庙外部，魔幻风格。宏伟的石质神庙建筑，有些破旧但依然庄严，门柱上有神秘符文和雕刻。神庙前站着一位白发少女玛希萝，穿着白色和金色的神庙守护者服饰，面带严肃但友善的表情。周围环境有些老旧的石像和台阶，长满青苔，几束光线从神庙上方照下。整体氛围神秘但不阴森。细节精美，光影效果突出。"
   temple_refused:
     initial_dialogue: '[sad]"很遗憾，你的答案不正确。"
 
@@ -263,6 +273,7 @@ scenes:
       - 不再尝试了，我要去湖泊
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_temple_refused.png
+    background_gen_prompt: "古老神庙入口处，魔幻风格。白发少女玛希萝站在神庙门前，表情略带失望但仍然友善。神庙门紧闭着，石墙上的符文暗淡无光。旅行者站在台阶下方，看起来有些困惑。周围环境有些灰暗，但仍有微光照明。远处可以看到通向湖泊的另一条路径隐约发着蓝光。细节精美，光影效果突出。"
   temple_interior:
     initial_dialogue: '[happy]"恭喜你，回答正确！"
 
@@ -314,6 +325,7 @@ scenes:
       - 神庙钥匙可能不好找，先去湖泊试试
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_temple_interior.png
+    background_gen_prompt: "古老神庙内部，魔幻风格。宽阔的神庙大厅，高耸的石柱支撑着天花板，墙壁上是精美的古代壁画，讲述着森林的历史和秘密。壁画中有钥匙和宝藏的图案。白发少女玛希萝站在中央，微笑着向旅行者展示神庙内部。室内有些古老的雕像和祭坛，几盏魔法灯提供柔和的金色光芒。地面上有复杂的几何图案。细节精美，光影效果突出。"
   find_temple_key:
     initial_dialogue: '你仔细搜索神庙，在一尊古老雕像的底座找到了一把黄金钥匙。
 
@@ -345,6 +357,7 @@ scenes:
       - 继续我的探索，前往湖泊
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_find_temple_key.png
+    background_gen_prompt: "神庙内部一角，魔幻风格。旅行者正从一座古老石像底座取出一把闪闪发光的黄金钥匙。白发少女玛希萝站在旁边，脸上露出惊喜和赞赏的表情。钥匙散发着金色的光芒，形状古朴而精致。背景是神庙内部的壁画和石柱，有些蓝色的光点指向远处，暗示湖泊的方向。整体氛围神秘而充满成就感。细节精美，光影效果突出。"
   mystic_lake:
     initial_dialogue: '你来到一个宁静的湖泊边，湖水清澈见底，倒映着天空。
 
@@ -413,6 +426,7 @@ scenes:
       - 我想我应该先去神庙一趟
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_mystic_lake.png
+    background_gen_prompt: "神秘湖泊场景，魔幻风格。一片宁静清澈的湖泊，湖水呈现梦幻的蓝色，倒映着天空和周围的景色。湖边的岩石上坐着一位红发少女麻喜，穿着蓝色水纹样式的长裙，手中拿着小竖琴。湖面上漂浮着几朵荷花和发光的水生植物，周围是低垂的柳树和开满蓝色花朵的灌木。氛围平静祥和，带有梦幻色彩。细节精美，光影效果突出。"
   lake_chat:
     initial_dialogue: '[happy]"很高兴能有人陪我聊天。这个湖泊虽然美丽，但有时也很孤独。"
 
@@ -481,6 +495,7 @@ scenes:
       - 能否让我在这美丽的湖中畅游？
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_chat.png
+    background_gen_prompt: "湖泊边的亲切交谈场景，魔幻风格。红发少女麻喜和旅行者坐在湖边的大石头上，面对面交谈。麻喜表情愉快，双手做出讲述的姿势。湖水在他们身边闪烁着微光，几只发光的蝴蝶和萤火虫在周围飞舞。天空是黄昏的颜色，给整个场景增添了温暖感。湖面平静，倒映着云彩和树木的剪影。氛围友好而亲切。细节精美，光影效果突出。"
   lake_swim:
     initial_dialogue: '[surprised]"你想在湖里游泳？当然可以，这湖水有净化心灵的功效。"
 
@@ -526,6 +541,7 @@ scenes:
       - 我游累了，想回到岸上
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_swim.png
+    background_gen_prompt: "神秘湖泊游泳场景，魔幻风格。旅行者正在透明的蓝色湖水中游泳，湖水散发着微弱的蓝色光芒。水下可以看到一些闪闪发光的神秘物体。红发少女麻喜站在岸边，带着好奇和关切的表情看着旅行者。湖底有各种水生植物和发光的鱼类，水面上漂浮着几片莲叶。水下光线柔和神秘，形成光束穿透水面的效果。细节精美，光影效果突出。"
   lake_discovery:
     initial_dialogue: '你潜入湖底，发现一个小盒子嵌在岩石中。你设法将它取出。
 
@@ -556,6 +572,7 @@ scenes:
       - 我要打开这个小盒子
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_discovery.png
+    background_gen_prompt: "湖泊岸边发现宝盒场景，魔幻风格。旅行者浑身湿透地站在岸边，手中拿着一个闪烁着蓝光的神秘小盒子，盒子上有神秘的水纹图案和符文。红发少女麻喜表情惊讶，双手微微抬起，靠近查看盒子。湖水在背景中闪烁，天空呈现傍晚的颜色。盒子散发出的蓝光映在两人脸上。周围环境充满期待和神秘感。细节精美，光影效果突出。"
   lake_riddle:
     initial_dialogue: '[serious]"要获得湖泊的钥匙，你需要回答我的问题。"
 
@@ -602,6 +619,7 @@ scenes:
       - 光或者影子？
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_riddle.png
+    background_gen_prompt: "湖边谜题场景，魔幻风格。红发少女麻喜神情严肃地站在湖边，双手合十，像是在提问。她周围环绕着微弱的蓝色光芒和看不见的风的痕迹（如飘动的发丝和衣角）。旅行者站在她对面，表情思考。背景是湖水和夕阳，水面上偶尔有涟漪，显示无形之风的存在。周围的树叶和花朵随风轻轻摇摆，有一种无形力量存在的感觉。细节精美，光影效果突出。"
   lake_wrong:
     initial_dialogue: '[sad]"很遗憾，这不是正确答案。"
 
@@ -647,6 +665,7 @@ scenes:
       - 先离开一下，思考清楚再回来
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_wrong.png
+    background_gen_prompt: "湖边失败场景，魔幻风格。红发少女麻喜表情略显失望，双手放下，湖水的蓝色光芒变得暗淡。旅行者看起来有些困惑和沮丧。周围环境变得稍微灰暗，但仍保持着神秘感。背景中可以看到通向森林其他区域的小路，暗示着可以去别处探索。有几片树叶随风飘落，象征着错误答案的流逝。细节精美，光影效果突出。"
   get_lake_key:
     initial_dialogue: '[happy]"答对了！风，无形却有力，就像智慧一样。"
 
@@ -702,6 +721,7 @@ scenes:
       - 先去神庙找到黄金钥匙再回来
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_get_lake_key.png
+    background_gen_prompt: "湖泊获得钥匙场景，魔幻风格。红发少女麻喜面带笑容，双手捧着一把发光的蓝色钥匙递给旅行者。钥匙形状优雅，有水波纹样式，散发着蓝色的光芒。背景是平静的湖面，天空呈现明亮的蓝色，湖面上有一阵微风拂过，形成漂亮的纹路，象征谜题的答案。周围环境明亮而充满希望，暗示着任务即将完成。若旅行者手中已有黄金钥匙，则可见两把钥匙的光芒相互辉映。细节精美，光影效果突出。"
   treasure_gate:
     initial_dialogue: '志津久带你来到森林深处的一个古老石门前。
 
@@ -750,6 +770,7 @@ scenes:
       - 我有点害怕，让我再思考一下
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_treasure_gate.png
+    background_gen_prompt: "宝藏门前场景，魔幻风格。森林最深处的一座巨大古老石门，门上有复杂的浮雕和两个钥匙孔形状分别对应神庙的金色钥匙和湖泊的蓝色钥匙。绿发女性守护者志津久站在石门旁，神情严肃。旅行者手持两把闪闪发光的钥匙（一把金色一把蓝色）站在门前，面临重要选择。门周围有古老的石柱和植物，散发着神秘的光芒。场景氛围庄严而神秘，象征着重要时刻的到来。细节精美，光影效果突出。"
   treasure_room:
     initial_dialogue: '门缓缓打开，里面不是金银财宝，而是一本古老的书和一面镜子。
 
@@ -820,6 +841,7 @@ scenes:
       - 我想和你们建立长久的友谊关系
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_treasure_room.png
+    background_gen_prompt: "宝藏室内场景，魔幻风格。宽敞的宝藏室内部，光线柔和神秘。中央有一个台座，上面放着两件宝物：一本古老发光的魔法书，书页上有神秘符文和森林魔法的图案；一面华丽的魔镜，能映照出观看者的真实自我。绿发女性守护者志津久站在一旁，解释着这些宝物的意义。空中漂浮着微小的光点，墙上有描绘森林历史的壁画。整体环境散发着神秘和启示的气氛，而非物质财富的堆积。细节精美，光影效果突出。"
   ending_wizard:
     initial_dialogue: '[joy]"你选择了知识的力量！"
 
@@ -840,6 +862,7 @@ scenes:
     achievements:
     - 魔法学徒
     background: backgrounds/mystery_forest_secret_ending_wizard.png
+    background_gen_prompt: "魔法学徒结局场景，魔幻风格。一个时间流逝的组合画面，左侧是旅行者刚刚接过魔法书的场景，中间是旅行者跟随志津久学习魔法的场景，右侧是多年后旅行者成为强大魔法师守护森林的场景。旅行者身穿类似志津久的守护者服装，但有自己的特色。魔法书在旅行者手中绽放光芒，周围环绕着各种森林生物和魔法元素。背景是四季变换的森林景色，象征时间流逝。整体氛围温暖而充满成就感，展现了知识之路的力量。细节精美，光影效果突出。"
   ending_reflection:
     initial_dialogue: '[calm]"你选择了自我认知。"
 
@@ -862,6 +885,7 @@ scenes:
     achievements:
     - 寻找真我
     background: backgrounds/mystery_forest_secret_ending_reflection.png
+    background_gen_prompt: "寻找真我结局场景，魔幻风格。中央是旅行者站在大魔镜前，镜中映照出旅行者的多个形象：过去、现在和未来的可能性。这些影像散发着柔和的光芒，互相交织。旅行者表情平静而坚定，像是找到了内心的答案。背景是从森林通向外部世界的道路，象征着返回现实但能随时回来的选择。远处有城市和山脉的剪影，代表旅行者的未来旅程。整体氛围冥想而深刻，带有一种内心平静的力量。细节精美，光影效果突出。"
   ending_friendship:
     initial_dialogue: '志津久惊讶地看着你，然后露出温暖的笑容。
 
@@ -886,6 +910,7 @@ scenes:
     achievements:
     - 友谊大师
     background: backgrounds/mystery_forest_secret_ending_friendship.png
+    background_gen_prompt: "永恒友谊结局场景，魔幻风格。温馨的森林空地，旅行者被三位森林守护者环绕：绿发的志津久、白发的玛希萝和红发的麻喜。四个人手拉着手围成一个圈，周围环绕着光点和花朵。场景中有几个小画面展示旅行者在不同季节来森林拜访朋友的画面。森林显得格外美丽和欢迎，有各种友善的生物在周围。天空明亮，阳光透过树叶形成温暖的光斑。整体氛围欢乐、温馨，充满归属感。细节精美，光影效果突出。"
   ending_left:
     initial_dialogue: '[calm]"我理解你想回家的心情。"
 
@@ -908,3 +933,4 @@ scenes:
     choices: []
     is_end_scene: true
     background: backgrounds/mystery_forest_secret_ending_left.png
+    background_gen_prompt: "早归旅人结局场景，魔幻风格。森林边缘的场景，绿发女性守护者志津久正在与旅行者告别，指向通往村庄的小路。旅行者背对森林，面向外界，但头微微转回，带有些许不舍和好奇。画面右侧是通往村庄的明亮小路，左侧是神秘的森林，其中隐约可见一些未探索的奇观（神庙、湖泊等的轮廓）。上方有一个小场景展示旅行者在家中做梦，梦见森林和志津久的模样。整体氛围略带遗憾但平和，暗示着未来可能的回归。细节精美，光影效果突出。"
