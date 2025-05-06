@@ -9,6 +9,8 @@ from gen_image import generate, save_binary_file
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 
+story_file = 'clocktower.yaml'
+
 def load_api_key():
     """从conf.yaml加载配置"""
     with open('conf.yaml', 'r', encoding='utf-8') as f:
@@ -22,17 +24,18 @@ def load_api_key():
 
 def load_story():
     """从example_story.yaml加载故事内容"""
-    with open('stories/example_story.yaml', 'r', encoding='utf-8') as f:
+    with open(f'stories/{story_file}', 'r', encoding='utf-8') as f:
         story = yaml.safe_load(f)
     return story
 
 def create_prompt_for_scene(scene_id, scene_data, story_title):
     """为场景创建图像生成提示"""
     # 从场景描述中提取关键信息
-    scene_description = scene_data.get('initial_dialogue', '')
+    scene_description = scene_data.get('background_gen_prompt', '')
     scene_description = scene_description.replace('\n', ' ')
     # 创建适合图像生成的提示
-    prompt = f"为故事《{story_title}》中的场景“{scene_id}”创建一张背景图。"
+    prompt = f"为故事《{story_title}》中的场景“{scene_id}”创建一张背景图。图像生成要求：{scene_description}。"
+    # prompt = f"为故事《{story_title}》中的场景“{scene_id}”创建一张背景图。"
     # prompt += f"你可以通过以下描述提取一些关于环境的关键字来生成背景图：{scene_description}。"
     prompt += "图像应具有细节感、氛围感，适合作为视觉小说或游戏的背景。"
     prompt += "请使图像在构图和光影上具有视觉吸引力。"
@@ -81,13 +84,13 @@ def main():
             print(f"generate image chunk_text: {chunk_text}")
             scene_data['background'] = f"{output_file}{file_extension}"
             save_binary_file(f"{output_file}{file_extension}", data_buffer)
-        
+        # break
         # 由于Gemini API限制为10RPM，添加延迟
         print("等待6秒以遵守API速率限制...")
         time.sleep(6)
     
     # 保存更新后的story到文件
-    with open('stories/example_story.yaml', 'w', encoding='utf-8') as f:
+    with open(f'stories/{story_file}', 'w', encoding='utf-8') as f:
         yaml.dump(story, f, allow_unicode=True, sort_keys=False)
     
     print("所有场景的背景图像生成完成！")

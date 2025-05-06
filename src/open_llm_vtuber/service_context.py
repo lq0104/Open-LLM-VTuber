@@ -57,9 +57,9 @@ class ServiceContext:
         self.game_manager = GameManager(self)
         # 当前场景数据
         self.current_scene_data: Dict = {}
-        # 默认加载example_story.yaml
-        if os.path.exists("stories/example_story.yaml"):
-            self.game_manager.load_story("example_story.yaml")
+        story_file = "clocktower.yaml"
+        if os.path.exists(f"stories/{story_file}"):
+            self.game_manager.load_story(story_file)
             self.current_scene_data = self.game_manager.start_game()
 
         # the system prompt is a combination of the persona prompt and live2d expression prompt
