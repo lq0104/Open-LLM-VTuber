@@ -409,8 +409,8 @@ class GameManager:
             # 解析回复，提取选项编号和对话回应
             # 使用更灵活的正则表达式来匹配可能的格式
             option_match = re.search(r'场景选项:?\s*(\d+)', response_text)
-            dialogue_match = re.search(r'对话回应:?\s*(.*?)(?:\n|$)', response_text, re.DOTALL)
-            language_help_match = re.search(r'语言帮助:?\s*(.*?)(?:\n|$)', response_text, re.DOTALL)
+            dialogue_match = re.search(r'对话回应:?[ \t]*(.*?)(?=\s*语言帮助:|\n|$)', response_text, re.DOTALL)
+            language_help_match = re.search(r'语言帮助:?[ \t]*(\{.*?\}|\[.*?\]|.+?)(?=\s*对话回应:|\n|$)', response_text, re.DOTALL)
             
             option_index = -1
             dialogue_response = ""

@@ -57,7 +57,7 @@ class ServiceContext:
         self.game_manager = GameManager(self)
         # 当前场景数据
         self.current_scene_data: Dict = {}
-        story_file = "clocktower.yaml"
+        story_file = "example_story_en.yaml"
         if os.path.exists(f"stories/{story_file}"):
             self.game_manager.load_story(story_file)
             self.current_scene_data = self.game_manager.start_game()

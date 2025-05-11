@@ -170,9 +170,14 @@ async def process_agent_response(
                             help_text += f"\n{chinese} → {english}"
                             has_valid_items = True
                     
-                    # 只有在确实有有效内容时才添加
-                    if has_valid_items:
-                        response_text += help_text
+                    # # 只有在确实有有效内容时才添加
+                    # if has_valid_items:
+                    #     response_text += help_text
+                    # 主动推送language_help到前端
+                    await websocket_send(json.dumps({
+                        "type": "language-help",
+                        "language_help": language_help
+                    }))
                 
                 dialogue_response = SentenceOutput(
                     display_text=DisplayText(text=response_text),
