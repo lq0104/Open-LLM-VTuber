@@ -387,7 +387,7 @@ scenes:
       - I think I should go to the temple first.
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_mystic_lake.png
-    background_gen_prompt: "Mystic lake scene, fantasy style. A tranquil, clear lake with water of a dreamy blue hue, reflecting the sky and surroundings. On a rock by the lake sits a red-haired girl, Maki, wearing a blue, water-patterned long dress and holding a small harp. A few lotuses and glowing aquatic plants float on the lake surface. Surrounding are weeping willows and shrubs blooming with blue flowers. The atmosphere is calm and peaceful, with a dreamlike quality. Exquisite details, prominent light and shadow effects."
+    background_gen_prompt: "Mystic lake scene, fantasy style. A tranquil, clear lake with water of a dreamy blue hue, reflecting the sky and surroundings. The scene features labeled natural elements creating an immersive English learning environment: floating lily pads with 'water lily/睡莲' tags, weeping willows with 'willow/柳树' signs, and colorful rocks marked 'stone/石头'. Various aquatic plants display both English and Chinese names like 'reed/芦苇' and 'lotus/莲花'. Gentle ripples on the water's surface form the word 'ripple/波纹'. Several floating dialogue bubbles contain useful English phrases like 'How beautiful!/真美啊!', 'What is this?/这是什么?', and 'I love nature/我爱大自然'. Fish jumping from the water have 'fish/鱼' labels. The sky has cloud formations spelling 'cloud/云'. Butterflies with 'butterfly/蝴蝶' tags hover near flowers marked 'flower/花'. The entire scene combines magical fantasy elements with practical language learning visual aids, all integrated naturally into the serene lake environment. The color palette includes calming blues and greens with accent colors highlighting the labeled elements."
   lake_riddle:
     initial_dialogue: |
       [serious]"To get the lake key, you need to answer my question."
@@ -432,7 +432,7 @@ scenes:
       - Light or shadow?
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_riddle.png
-    background_gen_prompt: "Lakeside riddle scene, fantasy style. The red-haired girl, Maki, stands seriously by the lake, hands clasped, as if posing a question. She is surrounded by a faint blue glow and traces of unseen wind (like flowing hair and clothes). The traveler stands opposite her, looking thoughtful. The background is the lake and sunset, with occasional ripples on the water surface, indicating the presence of the formless wind. Surrounding leaves and flowers sway gently in the wind, suggesting an unseen power. Exquisite details, prominent light and shadow effects."
+    background_gen_prompt: "Lakeside riddle scene, fantasy style. The red-haired girl, Maki, stands by the lake, hands clasped, as if posing a question. Simple English words related to the riddle float in the air: 'wind', 'power', 'feel', 'invisible'. She is surrounded by a faint blue glow and traces of unseen wind (like flowing hair and clothes). The traveler stands opposite her, looking thoughtful. A small chalkboard is visible with both English and Chinese writing. The background shows the lake and sunset, with ripples on the water indicating the presence of wind. Surrounding leaves and flowers sway gently, suggesting the answer to the riddle. The scene is designed to visually reinforce language learning through contextual clues."
   lake_wrong:
     initial_dialogue: |
       [sad]"Unfortunately, that's not the correct answer."
@@ -475,17 +475,15 @@ scenes:
       - I'll leave for a bit and come back when I've thought it through.
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_wrong.png
-    background_gen_prompt: "Lakeside failure scene, fantasy style. The red-haired girl, Maki, looks slightly disappointed, her hands lowered, and the lake's blue glow dims. The traveler appears confused and dejected. The surroundings become slightly darker but retain a sense of mystery. In the background, a path leading to other areas of the forest can be seen, suggesting exploration elsewhere. A few leaves fall with the wind, symbolizing the passing of the wrong answer. Exquisite details, prominent light and shadow effects."
+    background_gen_prompt: "Lakeside scene after an incorrect answer, fantasy style. The lake water maintains a gentle blue glow, though slightly dimmed. Colorful orbs of light float in the air, creating a warm, encouraging atmosphere. Semi-transparent mist forms subtle patterns along the shore, swirling gently in the breeze. Tender shoots and vibrant flowers grow along the water's edge, symbolizing hope and new beginnings. A path leading to other forest areas glimmers with faint guiding lights. The golden sunset sky reflects beautifully on the water's surface, creating patches of light. Leaves gently fall with the wind while new buds emerge, representing cycles of learning and growth. Concentric ripples appear on the water surface, emanating from the center. Glowing birds with blue-green plumage perch on distant trees, their feathers shimmering. Partially opened flower buds float on the water, waiting to bloom. The entire scene is bright, warm, and rich in color, filled with a sense of hope and forward momentum."
   get_lake_key:
     initial_dialogue: |
       [happy]"Correct! Wind, formless yet powerful, just like wisdom."
       Maki takes a blue key from the lake and hands it to you.
-      "This is the lake key, one of the keys to the treasure."
-      "The legendary treasure requires two keys to open - the lake key and the temple key."     
-      "Whether you've already found the temple key or not, this lake key is essential."      
-      "The temple is on the other side of the forest. If you haven't been there yet, you can seek the other key there."
-      "If you have both keys already, you can go find the treasure gate. The treasure is hidden deep in the forest, and Shizuku will guide you there."
-      "Good luck on your journey!"
+      "The legendary treasure requires two keys to open - the lake key and the temple key.    
+      The temple is on the other side of the forest. If you haven't been there yet, you can seek the other key there.
+      If you have both keys already, you can go find the treasure gate. The treasure is hidden deep in the forest, and Shizuku will guide you there.
+      Good luck on your journey!"
     choices:
     - choice_id: find_treasure
       text: Go find the treasure
@@ -529,7 +527,7 @@ scenes:
       - First go to the temple to find the golden key, then come back.
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_get_lake_key.png
-    background_gen_prompt: "Lake key acquisition scene, fantasy style. The red-haired girl, Maki, smiles as she hands a glowing blue key to the traveler. The key is elegantly shaped with water wave patterns and emits a blue light. The background is a calm lake surface, the sky is bright blue, and a gentle breeze ripples the water, creating beautiful patterns, symbolizing the answer to the riddle. The surroundings are bright and hopeful, hinting at the imminent completion of the quest. If the traveler already has the golden key, the two keys' glows can be seen reflecting each other. Exquisite details, prominent light and shadow effects."
+    background_gen_prompt: "Lake key acquisition scene, fantasy style. A glowing blue key hovering in the air, elegantly shaped with water wave patterns and emitting soft blue light. The background shows a calm lake with water ripples creating patterns reminiscent of wind. Various aquatic plants with unique shapes and colors grow around the lake edges. Luminous blue fish swim beneath the surface, visible through the crystal-clear water. Floating lotus flowers gently drift across the water's surface. The sky is bright blue with wisps of clouds, and sunlight filters through creating dancing light patterns on the water. The overall scene is filled with a sense of achievement and wonder, with vibrant colors and magical atmosphere. Detailed water reflections create a mirror effect, doubling the beauty of the surroundings."
   treasure_gate:
     initial_dialogue: |
       Shizuku leads you to an ancient stone gate deep in the forest.
@@ -768,7 +766,7 @@ scenes:
       - May I swim in this beautiful lake?
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_chat.png
-    background_gen_prompt: "Friendly conversation by the lake, fantasy style. The red-haired girl, Maki, and the traveler sit on a large rock by the lake, talking face-to-face. Maki has a pleasant expression and gestures with her hands as she speaks. The water shimmers beside them, and a few glowing butterflies and fireflies dance around. The sky is the color of dusk, adding warmth to the scene. The lake surface is calm, reflecting the silhouettes of clouds and trees. The atmosphere is friendly and cordial. Exquisite details, prominent light and shadow effects."
+    background_gen_prompt: "Friendly conversation by the lake, fantasy style. The red-haired girl, Maki, and the traveler sit on a large rock by the lake, engaged in friendly dialogue. Speech bubbles in English and Chinese show common conversation starters: 'How are you?/你好吗?', 'Nice to meet you/很高兴认识你', 'What's your name?/你叫什么名字?'. A conversation guide book lies open nearby with basic phrases. Maki gestures animatedly as she speaks, demonstrating body language. The water shimmers beside them, with labeled flora and fauna. Glowing butterflies carry words in both languages. The sky shows a beautiful sunset, and the atmosphere is warm and inviting. This scene creates a perfect setting for language practice through natural conversation."
   lake_swim:
     initial_dialogue: |
       [surprised]"You want to swim in the lake? Of course, this water has a purifying effect on the mind."
@@ -811,7 +809,7 @@ scenes:
       - I'm tired of swimming, I want to go back to the shore.
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_swim.png
-    background_gen_prompt: "Mysterious lake swimming scene, fantasy style. The traveler is swimming in transparent blue lake water that emits a faint blue glow. Some sparkling mysterious objects can be seen underwater. The red-haired girl, Maki, stands on the shore, watching the traveler with a curious and concerned expression. The lake bottom has various aquatic plants and glowing fish, and a few lotus leaves float on the surface. Underwater lighting is soft and mysterious, creating beam effects piercing the water surface. Exquisite details, prominent light and shadow effects."
+    background_gen_prompt: "Mysterious lake swimming scene, fantasy style. The traveler is swimming in transparent blue lake water. Floating waterproof cards display swimming-related vocabulary: 'swim/游泳', 'dive/潜水', 'float/漂浮', 'underwater/水下'. The water emits a faint blue glow, and sparkling mysterious objects can be seen underwater. The red-haired girl, Maki, stands on the shore, watching with a curious expression. Signs in English and Chinese warn: 'Deep water/深水区', 'Swim carefully/小心游泳'. The lake bottom features various labeled aquatic plants and glowing fish. Underwater lighting creates beam effects, highlighting different objects with their English names. The scene combines adventure with practical vocabulary learning in a visually engaging setting."
   lake_discovery:
     initial_dialogue: |
       You dive to the lake bottom and find a small box embedded in a rock. You manage to retrieve it.
@@ -838,4 +836,4 @@ scenes:
       - I want to open this small box.
     is_end_scene: false
     background: backgrounds/mystery_forest_secret_lake_discovery.png
-    background_gen_prompt: "Treasure box discovery scene by the lake, fantasy style. The traveler, soaking wet, stands on the shore holding a mysterious small box glowing with blue light. The box has mystical water patterns and runes. The red-haired girl, Maki, looks surprised, her hands slightly raised as she leans in to examine the box. The lake shimmers in the background, and the sky is the color of evening. The blue light from the box reflects on their faces. The surroundings are filled with anticipation and mystery. Exquisite details, prominent light and shadow effects." 
+    background_gen_prompt: "Treasure box discovery scene by the lake, fantasy style. The traveler, soaking wet, stands on the shore holding a mysterious small box glowing with blue light. The box has English inscriptions with Chinese translations: 'Secret/秘密', 'Treasure/宝藏', 'Discovery/发现'. The red-haired girl, Maki, looks surprised, pointing at the box with speech bubbles containing relevant English phrases: 'You found it!', 'What's inside?', 'Can you open it?'. The lake shimmers in the background with labeled elements. Items related to discovery are scattered nearby with bilingual tags. The blue light from the box illuminates their faces, creating dramatic lighting. The scene captures the excitement of discovery while reinforcing vocabulary related to exploration and achievements." 

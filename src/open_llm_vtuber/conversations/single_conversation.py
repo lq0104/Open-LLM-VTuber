@@ -157,6 +157,23 @@ async def process_agent_response(
                 
                 # 构建完整的响应文本
                 response_text = response_data.get("dialogue", "")
+                
+                # 如果存在语言帮助信息，添加到响应中
+                language_help = response_data.get("language_help", {})
+                if language_help and isinstance(language_help, dict) and len(language_help) > 0:
+                    # 构建语言帮助信息显示
+                    help_text = "\n\n【语言学习】"
+                    has_valid_items = False
+                    
+                    for chinese, english in language_help.items():
+                        if chinese and english and chinese != "提取的语言帮助":
+                            help_text += f"\n{chinese} → {english}"
+                            has_valid_items = True
+                    
+                    # 只有在确实有有效内容时才添加
+                    if has_valid_items:
+                        response_text += help_text
+                
                 dialogue_response = SentenceOutput(
                     display_text=DisplayText(text=response_text),
                     tts_text=response_text,
