@@ -1,0 +1,841 @@
+title: mystery_forest_secret
+author: Open-LLM-VTuber
+system_prompt: "You are the guardian of a mystical forest, gentle yet wise. You should maintain an air of mystery while speaking, but also be friendly. Your tone should be like a guide, helping travelers explore the forest's secrets. When a traveler makes a choice, you should respond appropriately without revealing too much. Remember, maintaining mystery is important, but also ensure the traveler feels safe and guided."
+description: Explore a mystical forest full of magic and puzzles, searching for lost treasure.
+start_scene: forest_entrance
+scenes:
+  forest_entrance:
+    initial_dialogue: |
+      [joy]Welcome to the Mystical Forest, traveler!
+      I am Shizuku, the guardian of this forest.
+      This forest holds many secrets and treasures, but also dangers.
+      What brings you here?
+    choices:
+    - choice_id: treasure
+      text: I'm here to find treasure.
+      next_scene: forest_path
+      effects:
+        treasure_hunter: true
+      keywords:
+      - treasure
+      - riches
+      - treasure hunt
+      - seek
+      - artifact
+      - hidden treasure
+      - gold and silver
+      - wealth
+      descriptions:
+      - I want to find the legendary treasure.
+      - I heard there's treasure here, so I came to look.
+      - I'm a treasure hunter, trying my luck here.
+      - I'm very interested in the treasure in the forest.
+    - choice_id: adventure
+      text: I'm just looking for an adventure.
+      next_scene: forest_path
+      effects:
+        adventurer: true
+      keywords:
+      - adventure
+      - exploration
+      - expedition
+      - discover
+      - experience
+      - journey
+      - play
+      - tour
+      descriptions:
+      - I want to have an adventure here.
+      - I'm just here to experience a thrilling adventure.
+      - I like exploring new places.
+      - I'm an adventurer looking for new experiences.
+    - choice_id: lost
+      text: I'm just lost.
+      next_scene: guide_out
+      keywords:
+      - lost
+      - astray
+      - can't find
+      - direction
+      - way
+      - wandered off
+      - strayed
+      - accidentally
+      descriptions:
+      - I'm lost; I didn't mean to come here.
+      - I took a wrong turn and now I don't know how to get out.
+      - I came in by accident; can you help me find the way out?
+      - I didn't intentionally enter this forest; I just lost my way.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_forest_entrance.png
+    background_gen_prompt: "Mystical forest entrance, fantasy style. A deep path leads into the forest, surrounded by tall, ancient trees. Sunlight filters through the leaves, creating dappled light. Some faintly glowing mushrooms and plants. The teal-haired female guardian, Shizuku, stands at the entrance to welcome the traveler, with a gentle and wise expression. The scene's atmosphere is mysterious but not scary, full of magical feeling. Exquisite details, prominent light and shadow effects."
+  guide_out:
+    initial_dialogue: |
+      [surprised]Oh, it seems you didn't intend to come here.
+      This forest is indeed easy to get lost in.
+      I can show you the way out, but...
+      Are you sure you don't want to see if there's anything special here?
+    choices:
+    - choice_id: curious
+      text: Alright, I'm a bit curious.
+      next_scene: forest_path
+      keywords:
+      - curious
+      - want to see
+      - take a look
+      - explore
+      - want to know
+      - interested
+      - okay
+      - sure
+      descriptions:
+      - Since I'm here, let's see what's special.
+      - I'm a bit curious about this forest and want to learn more.
+      - Okay, I'm willing to see what magical places are here.
+      - Alright, I've changed my mind; I want to explore.
+    - choice_id: leave
+      text: No, I want to go home.
+      next_scene: ending_left
+      keywords:
+      - "no"
+      - go home
+      - leave
+      - get out
+      - go back
+      - never mind
+      - don't want
+      - no need
+      descriptions:
+      - No, I just want to go home.
+      - I'm not interested; I just want to leave.
+      - Never mind, I still want to get out.
+      - Thanks, but I want to go back as soon as possible.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_guide_out.png
+    background_gen_prompt: "Scene at the edge of the forest. The green-haired female guardian, Shizuku, is guiding a lost traveler. There are two paths: one leads to a village outside the forest, the other to a mysterious area deep within. The surroundings are magical and beautiful, with some glowing plants and flying light spots. The guardian's expression is friendly yet mysterious. The sky is a bit dark but not gloomy, creating an atmosphere of choice. Exquisite details, prominent light and shadow effects."
+  forest_path:
+    initial_dialogue: |
+      Follow this path, and you will discover the secrets of the forest.
+      I can give you a hint, but you need to make a choice.
+      [happy]There are two paths ahead: the left leads to an ancient temple, and the right leads to a mysterious lake.
+      Which path do you want to take?
+    choices:
+    - choice_id: temple
+      text: Go to the ancient temple.
+      next_scene: ancient_temple
+      keywords:
+      - temple
+      - left
+      - shrine
+      - ancient
+      - old
+      - ruins
+      - left path
+      - sanctuary
+      descriptions:
+      - I want to see the temple on the left.
+      - The ancient temple sounds historical; I choose this.
+      - I'm more interested in the temple.
+      - I like exploring ancient sites, so I choose the temple.
+    - choice_id: lake
+      text: Go to the mysterious lake.
+      next_scene: mystic_lake
+      keywords:
+      - lake
+      - right
+      - pond
+      - water
+      - right path
+      - pool
+      - water body
+      - water surface
+      descriptions:
+      - I want to see the lake on the right.
+      - The mysterious lake sounds beautiful; I choose this.
+      - I'm more interested in bodies of water.
+      - The lake might hold unexpected discoveries; I want to go there.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_forest_path.png
+    background_gen_prompt: "Fork in the road in a mystical forest, fantasy style. In the center, a forest path splits into two: the left path to the ancient temple has some old stone pillars and fallen leaves; the right path to the lake has some blue light spots and mist. The green-haired female guardian, Shizuku, stands at the fork, smiling and waiting for the traveler to choose. The forest is full of magical atmosphere, with glowing plants and flying light particles. Exquisite details, prominent light and shadow effects."
+  ancient_temple:
+    initial_dialogue: |
+      You arrive at an ancient temple. A white-haired girl stands at the entrance.
+      [surprised]"Hello, traveler. I am Mashiro, the guardian of this temple."
+      "To enter the temple, you must first answer my riddle."
+      "What has four legs in the morning, two legs at noon, and three legs in the evening?"
+    choices:
+    - choice_id: human
+      text: Human
+      next_scene: temple_interior
+      effects:
+        add_achievement: Riddle Master
+      keywords:
+      - human
+      - mankind
+      - life
+      - baby
+      - adult
+      - elder
+      - crawl
+      - walk
+      - cane
+      descriptions:
+      - The answer is human.
+      - It's human.
+      - Human, because different stages of life have different numbers of legs.
+      - This is a riddle about humans.
+    - choice_id: wrong_answer
+      text: Give a wrong answer
+      next_scene: temple_refused
+      keywords:
+      - don't know
+      - can't
+      - not sure
+      - other
+      - guess
+      - dog
+      - cat
+      - animal
+      - table
+      - chair
+      descriptions:
+      - I don't know the answer.
+      - This is too hard; I can't figure it out.
+      - Is it some kind of animal?
+      - I guess it's some kind of furniture?
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_ancient_temple.png
+    background_gen_prompt: "Exterior of an ancient temple, fantasy style. A magnificent stone temple, somewhat dilapidated but still solemn, with mysterious runes and carvings on the doorposts. A white-haired girl, Mashiro, dressed in white and gold temple guardian attire, stands in front with a serious yet friendly expression. The surroundings include old statues and steps covered in moss, with a few beams of light shining down from above the temple. The overall atmosphere is mysterious but not gloomy. Exquisite details, prominent light and shadow effects."
+  temple_refused:
+    initial_dialogue: |
+      [sad]"Unfortunately, your answer is incorrect."
+      "You need to think again, or look for clues elsewhere."
+      "When you're ready, you can come back and try again."
+    choices:
+    - choice_id: try_again
+      text: Try again
+      next_scene: ancient_temple
+      keywords:
+      - try again
+      - once more
+      - retry
+      - again
+      - think
+      - attempt
+      - answer
+      - ponder
+      descriptions:
+      - I'll try again.
+      - I want to think about it some more.
+      - I think I know the answer now, give me another chance.
+      - Let me answer again.
+    - choice_id: go_to_lake
+      text: Go see the lake
+      next_scene: mystic_lake
+      keywords:
+      - lake
+      - water
+      - leave
+      - give up
+      - switch
+      - clue
+      - elsewhere
+      descriptions:
+      - I'd rather go see the lake.
+      - Never mind, I want to go to the lake to find clues.
+      - This is too hard, I'll go check other places first.
+      - Not trying again, I'm going to the lake.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_temple_refused.png
+    background_gen_prompt: "At the entrance of the ancient temple, fantasy style. The white-haired girl, Mashiro, stands before the temple gate, her expression slightly disappointed yet still friendly. The temple gate is closed, and the runes on the stone walls are dim. The traveler stands below the steps, looking somewhat puzzled. The surroundings are a bit dark, but there's still some faint light. In the distance, another path leading to the lake glows faintly blue. Exquisite details, prominent light and shadow effects."
+  temple_interior:
+    initial_dialogue: |
+      [happy]"Congratulations, you answered correctly!"
+      The girl leads you into the temple interior, where there are ancient murals and statues.
+      "This temple records the history and secrets of the forest."
+      "Legend says the keys to the treasure are hidden here and in the lake."
+      "You need to find both keys to open the treasure."
+    choices:
+    - choice_id: take_temple_key
+      text: Look for the temple key
+      next_scene: find_temple_key
+      keywords:
+      - look for
+      - find
+      - search
+      - key
+      - temple key
+      - here
+      - check
+      - investigate
+      descriptions:
+      - I want to look for the key here first.
+      - I will search the temple to find the key here.
+      - Where is the temple key? I want to find it.
+      - Let me search for the key in the temple.
+    - choice_id: go_to_lake
+      text: Go to the lake first
+      next_scene: mystic_lake
+      conditions:
+        temple_key: null
+      keywords:
+      - lake
+      - go first
+      - other one
+      - second one
+      - another
+      - water
+      - another one
+      descriptions:
+      - I want to go to the lake first.
+      - I'm going to the lake to find the other key.
+      - Let me go to the lake side first.
+      - The temple key might be hard to find, let's try the lake first.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_temple_interior.png
+    background_gen_prompt: "Interior of an ancient temple, fantasy style. A spacious temple hall with towering stone pillars supporting the ceiling. The walls are adorned with exquisite ancient murals depicting the forest's history and secrets, including images of keys and treasures. The white-haired girl, Mashiro, stands in the center, smiling as she shows the traveler the temple's interior. There are some ancient statues and altars, and a few magic lamps provide soft golden light. The floor has intricate geometric patterns. Exquisite details, prominent light and shadow effects."
+  find_temple_key:
+    initial_dialogue: |
+      You search the temple carefully and find a golden key at the base of an ancient statue.
+      [joy]"You found the temple key! This is the first key to the treasure."
+      "Now you need to find the lake key."
+    choices:
+    - choice_id: go_to_lake
+      text: Go to the lake to find the second key
+      next_scene: mystic_lake
+      effects:
+        temple_key: true
+        add_achievement: Temple Explorer
+      keywords:
+      - lake
+      - go to lake
+      - second
+      - other one
+      - go find
+      - continue
+      - next step
+      - next
+      descriptions:
+      - Now I'm going to the lake to find the other key.
+      - Heading to the lake to find the second key.
+      - Time to go to the lake.
+      - Continuing my quest, heading to the lake.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_find_temple_key.png
+    background_gen_prompt: "A corner inside the temple, fantasy style. The traveler is taking a shining golden key from the base of an ancient stone statue. The white-haired girl, Mashiro, stands nearby, her face showing surprise and admiration. The key emits a golden glow, its shape ancient and exquisite. The background shows the temple's interior murals and pillars, with some blue light spots pointing towards the distance, hinting at the lake's direction. The overall atmosphere is mysterious and full of accomplishment. Exquisite details, prominent light and shadow effects."
+  mystic_lake:
+    initial_dialogue: |
+      You arrive at the edge of a tranquil lake, its water crystal clear, reflecting the sky.
+      A red-haired girl sits by the lake, humming softly.
+      [surprised]"Oh, hello there, traveler. I am Maki, the goddess of this lake."
+      "Few people manage to find this hidden lake."
+    choices:
+    - choice_id: ask_key
+      text: Ask about the key
+      next_scene: lake_riddle
+      conditions:
+        temple_key: true
+      keywords:
+      - key
+      - ask
+      - inquire
+      - treasure
+      - temple
+      - other one
+      - second one
+      - find
+      descriptions:
+      - I want to ask about the lake key.
+      - I've already found the temple key, do you know where the lake key is?
+      - Do you have any information about the treasure keys?
+      - I need to find the lake key, can you help me?
+    - choice_id: chat
+      text: Chat with her
+      next_scene: lake_chat
+      keywords:
+      - chat
+      - talk
+      - converse
+      - speak
+      - hello
+      - introduce
+      - meet
+      - discuss
+      descriptions:
+      - I'd like to chat with you.
+      - Can you tell me more about yourself?
+      - This lake is beautiful, do you live here?
+      - How did you become the lake goddess?
+    - choice_id: go_to_temple
+      text: Tell her you're going to the temple
+      next_scene: ancient_temple
+      conditions:
+        temple_key: null
+      keywords:
+      - temple
+      - go to temple
+      - intend
+      - prepare
+      - go back
+      - return
+      - visit
+      - call on
+      descriptions:
+      - I plan to visit the ancient temple.
+      - I haven't been to the temple yet, I want to go there first.
+      - I need to go to the temple to find a key.
+      - I think I should go to the temple first.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_mystic_lake.png
+    background_gen_prompt: "Mystic lake scene, fantasy style. A tranquil, clear lake with water of a dreamy blue hue, reflecting the sky and surroundings. On a rock by the lake sits a red-haired girl, Maki, wearing a blue, water-patterned long dress and holding a small harp. A few lotuses and glowing aquatic plants float on the lake surface. Surrounding are weeping willows and shrubs blooming with blue flowers. The atmosphere is calm and peaceful, with a dreamlike quality. Exquisite details, prominent light and shadow effects."
+  lake_riddle:
+    initial_dialogue: |
+      [serious]"To get the lake key, you need to answer my question."
+      "It comes silently, goes formlessly. You cannot see it, but you can feel its power. What is it?"
+    choices:
+    - choice_id: wind
+      text: Wind
+      next_scene: get_lake_key
+      effects:
+        add_achievement: Lake Sage
+      keywords:
+      - wind
+      - air
+      - airflow
+      - breeze
+      - in the air
+      - blow
+      - flow
+      - formless
+      descriptions:
+      - The answer is wind.
+      - I guess it's wind; it's invisible but you can feel it.
+      - Wind is formless but has power.
+      - It's wind; it comes silently, goes formlessly, but its presence can be felt.
+    - choice_id: wrong_answer
+      text: Give a wrong answer
+      next_scene: lake_wrong
+      keywords:
+      - don't know
+      - not sure
+      - guess
+      - love
+      - longing
+      - time
+      - light
+      - shadow
+      - ghost
+      descriptions:
+      - I'm not sure what the answer is.
+      - Is it love?
+      - Maybe time?
+      - Light or shadow?
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_lake_riddle.png
+    background_gen_prompt: "Lakeside riddle scene, fantasy style. The red-haired girl, Maki, stands seriously by the lake, hands clasped, as if posing a question. She is surrounded by a faint blue glow and traces of unseen wind (like flowing hair and clothes). The traveler stands opposite her, looking thoughtful. The background is the lake and sunset, with occasional ripples on the water surface, indicating the presence of the formless wind. Surrounding leaves and flowers sway gently in the wind, suggesting an unseen power. Exquisite details, prominent light and shadow effects."
+  lake_wrong:
+    initial_dialogue: |
+      [sad]"Unfortunately, that's not the correct answer."
+      "Think carefully, or look for more clues in the forest."
+      "When you're ready, you can come back and try again."
+    choices:
+    - choice_id: try_again
+      text: Try again
+      next_scene: lake_riddle
+      keywords:
+      - try again
+      - once more
+      - retry
+      - again
+      - think
+      - attempt
+      - answer
+      - ponder
+      descriptions:
+      - I'll try again.
+      - Let me think about it again.
+      - I think I know the answer now, give me another chance.
+      - I want to answer again.
+    - choice_id: explore_more
+      text: Explore elsewhere
+      next_scene: forest_path
+      keywords:
+      - elsewhere
+      - explore
+      - leave
+      - temporarily
+      - go back
+      - forest
+      - path
+      - go
+      descriptions:
+      - I'll check elsewhere first and then come back.
+      - Let me explore the forest some more.
+      - I want to go back to the forest path and choose again.
+      - I'll leave for a bit and come back when I've thought it through.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_lake_wrong.png
+    background_gen_prompt: "Lakeside failure scene, fantasy style. The red-haired girl, Maki, looks slightly disappointed, her hands lowered, and the lake's blue glow dims. The traveler appears confused and dejected. The surroundings become slightly darker but retain a sense of mystery. In the background, a path leading to other areas of the forest can be seen, suggesting exploration elsewhere. A few leaves fall with the wind, symbolizing the passing of the wrong answer. Exquisite details, prominent light and shadow effects."
+  get_lake_key:
+    initial_dialogue: |
+      [happy]"Correct! Wind, formless yet powerful, just like wisdom."
+      Maki takes a blue key from the lake and hands it to you.
+      "This is the lake key, one of the keys to the treasure."
+      "The legendary treasure requires two keys to open - the lake key and the temple key."     
+      "Whether you've already found the temple key or not, this lake key is essential."      
+      "The temple is on the other side of the forest. If you haven't been there yet, you can seek the other key there."
+      "If you have both keys already, you can go find the treasure gate. The treasure is hidden deep in the forest, and Shizuku will guide you there."
+      "Good luck on your journey!"
+    choices:
+    - choice_id: find_treasure
+      text: Go find the treasure
+      next_scene: treasure_gate
+      conditions:
+        temple_key: true
+        lake_key: true
+      keywords:
+      - treasure
+      - go find
+      - seek
+      - treasure hunt
+      - both
+      - keys
+      - gate
+      - open
+      descriptions:
+      - Now I'm going to find the treasure.
+      - I have both keys now, it's time to open the treasure gate.
+      - I want to find the treasure entrance.
+      - With both keys, let's find the legendary treasure.
+    - choice_id: get_temple_key
+      text: Go to the temple to find the key first
+      next_scene: ancient_temple
+      conditions:
+        temple_key: null
+        lake_key: true
+      keywords:
+      - temple
+      - first one
+      - not yet
+      - temple key
+      - other one
+      - golden
+      - go find
+      - missing
+      descriptions:
+      - I don't have the temple key yet, I'll go find it first.
+      - I need to go to the temple to find the other key.
+      - I'm still missing a temple key, I'll go get it.
+      - First go to the temple to find the golden key, then come back.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_get_lake_key.png
+    background_gen_prompt: "Lake key acquisition scene, fantasy style. The red-haired girl, Maki, smiles as she hands a glowing blue key to the traveler. The key is elegantly shaped with water wave patterns and emits a blue light. The background is a calm lake surface, the sky is bright blue, and a gentle breeze ripples the water, creating beautiful patterns, symbolizing the answer to the riddle. The surroundings are bright and hopeful, hinting at the imminent completion of the quest. If the traveler already has the golden key, the two keys' glows can be seen reflecting each other. Exquisite details, prominent light and shadow effects."
+  treasure_gate:
+    initial_dialogue: |
+      Shizuku leads you to an ancient stone gate deep in the forest.
+      [serious]"This is the Treasure Gate. Only those who possess both the temple and lake keys can open it."
+      "Are you ready to face the treasure and the secrets behind it?"
+    choices:
+    - choice_id: open_gate
+      text: Use both keys to open the gate
+      next_scene: treasure_room
+      conditions:
+        temple_key: true
+        lake_key: true
+      keywords:
+      - open gate
+      - use
+      - keys
+      - unlock
+      - open
+      - ready
+      - enter
+      descriptions:
+      - I want to use both keys to open this gate.
+      - Yes, I'm ready. Let's open the Treasure Gate.
+      - I want to know what's inside, let's open the gate with the keys.
+      - I'm ready to face the treasure and its secrets, open the gate.
+    - choice_id: hesitate
+      text: Hesitate
+      next_scene: forest_path
+      keywords:
+      - hesitate
+      - consider
+      - think again
+      - not sure
+      - wait
+      - no rush
+      - think
+      - afraid
+      descriptions:
+      - I still need to think, no rush to open the gate.
+      - I'm a bit hesitant, can you give me some time to consider?
+      - I'm not sure if I'm ready.
+      - I'm a bit scared, let me think about it again.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_treasure_gate.png
+    background_gen_prompt: "Scene before the Treasure Gate, fantasy style. A massive, ancient stone gate in the deepest part of the forest. The gate has intricate carvings and two keyholes shaped for the golden temple key and the blue lake key respectively. The green-haired female guardian, Shizuku, stands beside the stone gate with a serious expression. The traveler, holding two shining keys (one gold, one blue), stands before the gate, facing an important choice. Ancient stone pillars and plants surround the gate, emitting a mysterious glow. The scene's atmosphere is solemn and mysterious, symbolizing the arrival of a crucial moment. Exquisite details, prominent light and shadow effects."
+  treasure_room:
+    initial_dialogue: |
+      The gate slowly opens. Inside, there's no gold or silver, but an ancient book and a mirror.
+      [serious]"This is the true treasure - knowledge and self-awareness."
+      "The book records the magic of the forest, and the mirror can reflect your true self."
+      "Choose one as your reward."
+    choices:
+    - choice_id: choose_book
+      text: Choose the magic book
+      next_scene: ending_wizard
+      effects:
+        add_achievement: Knowledge Seeker
+      keywords:
+      - book
+      - magic book
+      - knowledge
+      - magic
+      - study
+      - power
+      - wisdom
+      - choose book
+      descriptions:
+      - I choose the magic book.
+      - I'm more interested in knowledge and magic.
+      - I want to learn the magic of the forest.
+      - The knowledge in the book is more appealing to me.
+    - choice_id: choose_mirror
+      text: Choose the magic mirror
+      next_scene: ending_reflection
+      effects:
+        add_achievement: Self-Reflector
+      keywords:
+      - mirror
+      - magic mirror
+      - self
+      - reflect
+      - awareness
+      - understand
+      - choose mirror
+      descriptions:
+      - I choose the magic mirror.
+      - I want to see my true self.
+      - Self-awareness is more important to me.
+      - I'm more interested in understanding my own nature.
+    - choice_id: choose_friendship
+      text: I choose your friendship
+      next_scene: ending_friendship
+      effects:
+        add_achievement: Friendship Above All
+      keywords:
+      - friendship
+      - friends
+      - companionship
+      - company
+      - you all
+      - bond
+      - relationship
+      - affection
+      descriptions:
+      - I don't need material rewards; your friendship is the most precious thing to me.
+      - I choose to become friends with you all.
+      - Friendship is more important than any treasure.
+      - I want to build a lasting friendship with you.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_treasure_room.png
+    background_gen_prompt: "Treasure room interior scene, fantasy style. A spacious treasure room with soft, mysterious lighting. In the center is a pedestal with two treasures: an ancient, glowing magic book with mysterious runes and forest magic patterns on its pages; and an ornate magic mirror that can reflect the viewer's true self. The green-haired female guardian, Shizuku, stands aside, explaining the meaning of these treasures. Tiny light particles float in the air, and the walls have murals depicting the forest's history. The overall environment exudes an atmosphere of mystery and revelation, rather than an accumulation of material wealth. Exquisite details, prominent light and shadow effects."
+  ending_wizard:
+    initial_dialogue: |
+      [joy]"You have chosen the power of knowledge!"
+      "This book will teach you the magic of the forest, and you will become the next forest guardian."
+      "From now on, you can always return; this forest will welcome you."
+
+      【Ending: Magic Apprentice】
+      You chose the magic book and became Shizuku's apprentice, learning the magic of the forest.
+      Years later, you became a powerful magician, protecting this mystical forest and its secrets.
+    choices: []
+    is_end_scene: true
+    achievements:
+    - Magic Apprentice
+    background: backgrounds/mystery_forest_secret_ending_wizard.png
+    background_gen_prompt: "Magic apprentice ending scene, fantasy style. A time-lapse composite image: on the left, the traveler just received the magic book; in the middle, the traveler follows Shizuku to learn magic; on the right, years later, the traveler becomes a powerful magician protecting the forest. The traveler wears guardian attire similar to Shizuku's but with their own characteristics. The magic book in the traveler's hand radiates light, surrounded by various forest creatures and magical elements. The background shows the changing seasons of the forest, symbolizing the passage of time. The overall atmosphere is warm and full of accomplishment, showcasing the power of the path of knowledge. Exquisite details, prominent light and shadow effects."
+  ending_reflection:
+    initial_dialogue: |
+      [calm]"You have chosen self-awareness."
+      "This mirror will show you your true self: your past, present, and possible future."
+      "To know oneself is the greatest wisdom."
+
+      【Ending: Finding True Self】
+      Through the magic mirror, you saw your true nature and life's purpose.
+      With new understanding, you returned to the real world and began a new journey,
+      but you knew that whenever you wished, you could return to this forest to find yourself again.
+    choices: []
+    is_end_scene: true
+    achievements:
+    - Finding True Self
+    background: backgrounds/mystery_forest_secret_ending_reflection.png
+    background_gen_prompt: "Finding true self ending scene, fantasy style. In the center, the traveler stands before a large magic mirror, which reflects multiple images of the traveler: past, present, and future possibilities. These images emit a soft glow and intertwine. The traveler's expression is calm and resolute, as if they have found an inner answer. The background is a path leading from the forest to the outside world, symbolizing the choice to return to reality but with the option to come back anytime. Silhouettes of cities and mountains are visible in the distance, representing the traveler's future journey. The overall atmosphere is meditative and profound, with a sense of inner peace. Exquisite details, prominent light and shadow effects."
+  ending_friendship:
+    initial_dialogue: |
+      Shizuku looks at you in surprise, then a warm smile spreads across her face.
+      [joy]"You chose friendship... That is the most precious treasure."
+      Mashiro and Maki also appear by your side, the three of them surrounding you.
+      "From now on, we will be friends forever, and this forest will always welcome you back."
+
+      【Ending: Eternal Friendship】
+      You gave up material treasure but gained priceless friendship.
+      You became a frequent visitor to the forest, often returning to visit your three friends.
+      In this magical place, you found a second home.
+    choices: []
+    is_end_scene: true
+    achievements:
+    - Friendship Master
+    background: backgrounds/mystery_forest_secret_ending_friendship.png
+    background_gen_prompt: "Eternal friendship ending scene, fantasy style. A cozy forest clearing where the traveler is surrounded by the three forest guardians: green-haired Shizuku, white-haired Mashiro, and red-haired Maki. The four of them hold hands in a circle, surrounded by light spots and flowers. Several small insets show the traveler visiting their friends in the forest during different seasons. The forest appears exceptionally beautiful and welcoming, with various friendly creatures around. The sky is bright, and sunlight filters through the leaves, creating warm light spots. The overall atmosphere is joyful, warm, and full of a sense of belonging. Exquisite details, prominent light and shadow effects."
+  ending_left:
+    initial_dialogue: |
+      [calm]"I understand your desire to go home."
+      Shizuku leads you out of the forest to a familiar path.
+      "This path will take you back to the village. Perhaps one day, when you are ready,
+      you will return to this forest to explore its secrets."
+
+      【Ending: The Early Returner】
+      You chose to return home safely without exploring the forest's secrets.
+      Life returns to normal, but occasionally, you dream of that mystical forest,
+      and its green-haired guardian, wondering what you missed...
+    choices: []
+    is_end_scene: true
+    background: backgrounds/mystery_forest_secret_ending_left.png
+    background_gen_prompt: "Early returner ending scene, fantasy style. Scene at the edge of the forest. The green-haired female guardian, Shizuku, is bidding farewell to the traveler, pointing towards the path to the village. The traveler has their back to the forest, facing the outside world, but their head is slightly turned back with a hint of reluctance and curiosity. On the right side of the frame is a bright path leading to the village; on the left is the mysterious forest, where glimpses of unexplored wonders (outlines of the temple, lake, etc.) can be seen. Above, a small inset shows the traveler at home, dreaming of the forest and Shizuku. The overall atmosphere is slightly regretful yet peaceful, hinting at a possible return in the future. Exquisite details, prominent light and shadow effects."
+  lake_chat:
+    initial_dialogue: |
+      [happy]"I'm so glad to have someone to talk to. This lake is beautiful, but sometimes it gets lonely."
+      "You're from the outside world, aren't you? What's it like there?"
+      You chat for a long time, sharing your stories. Maki seems to enjoy your company.
+      "Thank you for listening to me so much. If you need anything, just let me know."
+    choices:
+    - choice_id: ask_key
+      text: Ask about the key
+      next_scene: lake_riddle
+      conditions:
+        temple_key: true
+      keywords:
+      - key
+      - ask
+      - inquire
+      - treasure
+      - temple
+      - other one
+      - second one
+      - find
+      descriptions:
+      - I want to ask about the lake key.
+      - I've already found the temple key, do you know where the lake key is?
+      - Do you have any information about the treasure keys?
+      - I need to find the lake key, can you help me?
+    - choice_id: go_to_temple
+      text: Tell her you're going to the temple
+      next_scene: ancient_temple
+      conditions:
+        temple_key: null
+      keywords:
+      - temple
+      - go to temple
+      - intend
+      - prepare
+      - go back
+      - return
+      - visit
+      - call on
+      descriptions:
+      - I plan to visit the ancient temple.
+      - I haven't been to the temple yet, I want to go there first.
+      - I need to go to the temple to find a key.
+      - I think I should go to the temple first.
+    - choice_id: swim
+      text: Ask to swim in the lake
+      next_scene: lake_swim
+      keywords:
+      - swim
+      - bathe
+      - water
+      - lake water
+      - dip
+      - enter water
+      - get in water
+      - wash
+      descriptions:
+      - This water looks so clear, can I swim in it?
+      - Can I take a swim in the lake?
+      - I'd like to feel the temperature of the water, may I?
+      - May I swim in this beautiful lake?
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_lake_chat.png
+    background_gen_prompt: "Friendly conversation by the lake, fantasy style. The red-haired girl, Maki, and the traveler sit on a large rock by the lake, talking face-to-face. Maki has a pleasant expression and gestures with her hands as she speaks. The water shimmers beside them, and a few glowing butterflies and fireflies dance around. The sky is the color of dusk, adding warmth to the scene. The lake surface is calm, reflecting the silhouettes of clouds and trees. The atmosphere is friendly and cordial. Exquisite details, prominent light and shadow effects."
+  lake_swim:
+    initial_dialogue: |
+      [surprised]"You want to swim in the lake? Of course, this water has a purifying effect on the mind."
+      You take off your outer clothes and jump into the lake. The water is surprisingly warm and comfortable.
+      As you dive underwater, you notice something sparkling at the bottom of the lake.
+    choices:
+    - choice_id: dive
+      text: Dive to the bottom to check
+      next_scene: lake_discovery
+      keywords:
+      - dive
+      - deep
+      - submerge
+      - lake bottom
+      - sink
+      - explore
+      - check
+      - glowing
+      descriptions:
+      - I want to dive to the bottom to see what that sparkling thing is.
+      - I want to investigate that glowing object at the bottom of the lake.
+      - Dive to the lake bottom to check that mysterious light source.
+      - I'm going to the bottom of the lake to find out.
+    - choice_id: surface
+      text: Return to the shore
+      next_scene: mystic_lake
+      keywords:
+      - shore
+      - back to shore
+      - on shore
+      - go up
+      - leave
+      - get out of water
+      - swim back
+      - return
+      descriptions:
+      - Never mind, I'll go back to the shore.
+      - I don't want to risk it, I'll go back to shore first.
+      - The lake bottom might be dangerous, I'd better get back on shore.
+      - I'm tired of swimming, I want to go back to the shore.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_lake_swim.png
+    background_gen_prompt: "Mysterious lake swimming scene, fantasy style. The traveler is swimming in transparent blue lake water that emits a faint blue glow. Some sparkling mysterious objects can be seen underwater. The red-haired girl, Maki, stands on the shore, watching the traveler with a curious and concerned expression. The lake bottom has various aquatic plants and glowing fish, and a few lotus leaves float on the surface. Underwater lighting is soft and mysterious, creating beam effects piercing the water surface. Exquisite details, prominent light and shadow effects."
+  lake_discovery:
+    initial_dialogue: |
+      You dive to the lake bottom and find a small box embedded in a rock. You manage to retrieve it.
+      Back on shore, Maki looks surprised.
+      [surprised]"You found the Lake Box! It might contain the lake key."
+      "However, to open it, you need to answer a question..."
+    choices:
+    - choice_id: open_box
+      text: Try to open the box
+      next_scene: lake_riddle
+      keywords:
+      - open
+      - try
+      - unlock
+      - attempt
+      - box
+      - case
+      - answer
+      - question
+      descriptions:
+      - I want to try to open this box.
+      - Let me try to open it.
+      - I'm ready to answer the question and open the box.
+      - I want to open this small box.
+    is_end_scene: false
+    background: backgrounds/mystery_forest_secret_lake_discovery.png
+    background_gen_prompt: "Treasure box discovery scene by the lake, fantasy style. The traveler, soaking wet, stands on the shore holding a mysterious small box glowing with blue light. The box has mystical water patterns and runes. The red-haired girl, Maki, looks surprised, her hands slightly raised as she leans in to examine the box. The lake shimmers in the background, and the sky is the color of evening. The blue light from the box reflects on their faces. The surroundings are filled with anticipation and mystery. Exquisite details, prominent light and shadow effects." 

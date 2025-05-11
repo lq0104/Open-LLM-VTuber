@@ -89,6 +89,7 @@ class GameManager:
             # 处理场景数据
             scenes = {}
             for scene_id, scene_data in story_data_dict.get('scenes', {}).items():
+                logger.info(f"Processing scene {scene_id}")
                 choices = []
                 for choice_data in scene_data.get('choices', []):
                     # 处理关键词和描述，用于NLP匹配

@@ -5,11 +5,7 @@ description: 探索一座神秘的时光钟楼，解开时间的谜题，发现�
 start_scene: entrance
 scenes:
   entrance:
-    initial_dialogue: '[smile]欢迎来到时光钟楼，旅行者。
-
-      我是这里的守护者艾琳。
-
-      这座钟楼据说能改变命运，每个人来到这里的理由都不尽相同。有些人渴望改变未来，有些人热衷于解谜，也有人只是随意走进来。你呢？你是怀着怎样的心情来到这里的？\n你可以告诉我你的目标，或者只是随意看看。\n'
+    initial_dialogue: '[smile]欢迎来到时光钟楼，旅行者。 我是这里的守护者艾琳。 这座钟楼据说能改变命运，每个人来到这里的理由都不尽相同。有些人渴望改变未来，有些人热衷于解谜，也有人只是随意走进来。你呢？你是怀着怎样的心情来到这里的？你可以告诉我你的目标，或者只是随意看看。'
     choices:
     - choice_id: seek_future
       text: 我想改变未来
@@ -58,11 +54,8 @@ scenes:
     background: backgrounds/clocktower_entrance.png
     background_gen_prompt: 古老的钟楼入口，石阶通向高耸的钟楼，门口有一位银发女性守护者。天空晴朗，钟楼外墙布满爬山虎。
   main_hall:
-    initial_dialogue: '你走进钟楼大厅，四周是高大的齿轮和钟表。
-
-      [gentle]钟楼分为几个区域：有安静的图书室，适合寻找知识和线索；高处的钟声室，那里钟声悠扬，常常唤醒人们的回忆；还有略显神秘的地下室，许多秘密都藏在那幽暗的角落。
-
-      你想先去哪里看看？如果需要建议，我可以为你简单介绍每个地方的特点。\n'
+    initial_dialogue: 你走进钟楼大厅，四周是高大的齿轮和钟表。 [gentle]钟楼分为几个区域：有安静的图书室，适合寻找知识和线索；高处的钟声室，那里钟声悠扬，常常唤醒人们的回忆；还有略显神秘的地下室，许多秘密都藏在那幽暗的角落。
+      你想先去哪里看看？如果需要建议，我可以为你简单介绍每个地方的特点。
     choices:
     - choice_id: go_library
       text: 去图书室
@@ -107,11 +100,8 @@ scenes:
     background: backgrounds/clocktower_main_hall.png
     background_gen_prompt: 钟楼大厅，中央有巨大的齿轮和钟表，阳光从高窗洒下，空气中有微尘漂浮。
   library:
-    initial_dialogue: '图书室里堆满了古老的书籍和卷轴。
-
-      [thoughtful]空气中弥漫着纸张和墨水的味道。你注意到有一本书正发出微光，仿佛在邀请你靠近。当然，你也可以在书架间随意翻找，或是静静感受这里的氛围。
-
-      你打算做什么？如果需要，我可以帮你回忆一下这里都有哪些值得注意的地方。\n'
+    initial_dialogue: 图书室里堆满了古老的书籍和卷轴。 [thoughtful]空气中弥漫着纸张和墨水的味道。你注意到有一本书正发出微光，仿佛在邀请你靠近。当然，你也可以在书架间随意翻找，或是静静感受这里的氛围。
+      你打算做什么？如果需要，我可以帮你回忆一下这里都有哪些值得注意的地方。
     choices:
     - choice_id: read_glowing_book
       text: 阅读发光的书
@@ -168,9 +158,7 @@ scenes:
     background: backgrounds/clocktower_library.png
     background_gen_prompt: 钟楼图书室，书架上堆满古书，中央有一本发光的书，房间安静温馨。
   time_puzzle:
-    initial_dialogue: '你翻开发光的书，书页上浮现出谜题：
-
-      [serious]“什么东西一去不复返，却又每天都来？”\n如果你一时想不出答案，也可以回到图书室再找找线索，或者和我聊聊你的想法。\n'
+    initial_dialogue: 你翻开发光的书，书页上浮现出谜题： [serious]“什么东西一去不复返，却又每天都来？”如果你一时想不出答案，也可以回到图书室再找找线索，或者和我聊聊你的想法。
     choices:
     - choice_id: answer_time
       text: 时间
@@ -203,9 +191,7 @@ scenes:
     background: backgrounds/clocktower_time_puzzle.png
     background_gen_prompt: 图书室中央，发光的书悬浮在空中，书页上浮现谜题文字，周围有淡淡的光环。
   find_diary:
-    initial_dialogue: '你找到一本旧日记，里面记载着钟楼建造者的故事。
-
-      [gentle]日记里提到地下室藏着重要的线索。你可以顺着这个线索前往地下室，也可以继续在图书室探索，或是暂时回到大厅换个心情。\n'
+    initial_dialogue: 你找到一本旧日记，里面记载着钟楼建造者的故事。 [gentle]日记里提到地下室藏着重要的线索。你可以顺着这个线索前往地下室，也可以继续在图书室探索，或是暂时回到大厅换个心情。
     choices:
     - choice_id: go_basement
       text: 前往地下室
@@ -224,7 +210,7 @@ scenes:
     background: backgrounds/clocktower_find_diary.png
     background_gen_prompt: 图书室一角，桌上摊开一本旧日记，旁边有一盏小油灯。
   puzzle_fail:
-    initial_dialogue: '[sad]“很遗憾，答案不对。”\n如果你需要一些提示，可以和我聊聊你的思路，或者回到图书室再找找灵感。你也可以随时尝试新的答案。\n'
+    initial_dialogue: '[sad]“很遗憾，答案不对。”如果你需要一些提示，可以和我聊聊你的思路，或者回到图书室再找找灵感。你也可以随时尝试新的答案。'
     choices:
     - choice_id: try_again
       text: 再次尝试
@@ -255,7 +241,7 @@ scenes:
     background: backgrounds/clocktower_puzzle_fail.png
     background_gen_prompt: 图书室内，发光的书暗淡下来，房间略显昏暗。
   secret_passage:
-    initial_dialogue: '[joy]“太棒了！你解开了谜题！”\n书本发出强光，墙上出现一道暗门。\n[excited]你发现了通往钟楼顶层的秘密通道。你可以选择顺着这条通道前往钟声室，也可以回到大厅，或者在图书室再停留片刻。\n'
+    initial_dialogue: '[joy]“太棒了！你解开了谜题！”书本发出强光，墙上出现一道暗门。[excited]你发现了通往钟楼顶层的秘密通道。你可以选择顺着这条通道前往钟声室，也可以回到大厅，或者在图书室再停留片刻。'
     choices:
     - choice_id: go_bellroom
       text: 进入钟声室
@@ -274,9 +260,7 @@ scenes:
     background: backgrounds/clocktower_secret_passage.png
     background_gen_prompt: 图书室墙上打开一道暗门，门后有螺旋楼梯通向上方。
   bellroom:
-    initial_dialogue: '你来到钟声室，巨大的铜钟悬挂在头顶。
-
-      [serious]钟声可以唤醒沉睡的记忆。你可以选择敲响钟声，感受那份回响，也可以在房间里四处看看，或者回到大厅继续探索别的地方。\n'
+    initial_dialogue: 你来到钟声室，巨大的铜钟悬挂在头顶。 [serious]钟声可以唤醒沉睡的记忆。你可以选择敲响钟声，感受那份回响，也可以在房间里四处看看，或者回到大厅继续探索别的地方。
     choices:
     - choice_id: ring_bell
       text: 敲响钟声
@@ -320,9 +304,7 @@ scenes:
     background: backgrounds/clocktower_bellroom.png
     background_gen_prompt: 钟楼顶层，巨大的铜钟悬挂在横梁上，阳光从窗户照进来。
   memory_scene:
-    initial_dialogue: '钟声回荡，你眼前浮现出自己的童年回忆。
-
-      [calm]有些记忆温暖，有些则让人感慨。你渐渐明白，真正的未来掌握在自己手中。你可以选择接受这份领悟，或是回到大厅，继续你的探索之旅。\n'
+    initial_dialogue: 钟声回荡，你眼前浮现出自己的童年回忆。 [calm]有些记忆温暖，有些则让人感慨。你渐渐明白，真正的未来掌握在自己手中。你可以选择接受这份领悟，或是回到大厅，继续你的探索之旅。
     choices:
     - choice_id: accept_truth
       text: 接受真相
@@ -341,11 +323,9 @@ scenes:
       - 未来由我掌控
     is_end_scene: false
     background: backgrounds/clocktower_memory_scene.png
-    background_gen_prompt: 钟声室内，钟声回荡，主角眼前浮现出童年回忆的幻影。
+    background_gen_prompt: 钟声室内，阳光从高窗洒下，巨大的铜钟静静悬挂，空气中回荡着钟声，空间庄严安静。
   basement:
-    initial_dialogue: '地下室幽暗潮湿，墙上有一块奇怪的石板。
-
-      [mysterious]石板上刻着：“只有勇敢者才能改变命运。”你还发现角落里有一个上锁的箱子，似乎需要特殊的钥匙才能打开。你可以尝试触摸石板，寻找钥匙，尝试破解箱子密码，或者回到大厅，换个地方呼吸新鲜空气。\n'
+    initial_dialogue: 地下室幽暗潮湿，墙上有一块奇怪的石板。 [mysterious]石板上刻着：“只有勇敢者才能改变命运。”你还发现角落里有一个上锁的箱子，似乎需要特殊的钥匙才能打开。你可以尝试触摸石板，寻找钥匙，尝试破解箱子密码，或者回到大厅，换个地方呼吸新鲜空气。
     choices:
     - choice_id: touch_stone
       text: 触摸石板
@@ -400,11 +380,9 @@ scenes:
       - 重新选择
     is_end_scene: false
     background: backgrounds/clocktower_basement.png
-    background_gen_prompt: 钟楼地下室，墙上有一块刻有文字的石板，房间昏暗有微光。
+    background_gen_prompt: 钟楼地下室，石墙和地面潮湿，墙上嵌有刻字石板，角落有上锁的旧箱子，光线昏暗。
   fate_choice:
-    initial_dialogue: '你触摸石板，感受到一股温暖的力量。
-
-      [gentle]你获得了改变命运的勇气。这份勇气会伴随你继续探索钟楼的秘密，或者回到大厅，开启新的旅程。\n'
+    initial_dialogue: 你触摸石板，感受到一股温暖的力量。 [gentle]你获得了改变命运的勇气。这份勇气会伴随你继续探索钟楼的秘密，或者回到大厅，开启新的旅程。
     choices:
     - choice_id: return_hall
       text: 回到大厅
@@ -423,37 +401,20 @@ scenes:
       - 完成挑战
     is_end_scene: false
     background: backgrounds/clocktower_fate_choice.png
-    background_gen_prompt: 地下室内，主角触摸石板，石板发出柔和光芒。
+    background_gen_prompt: 地下室深处，石板微微发光，墙壁和地面反射出柔和的光芒，环境神秘安静。
   ending_truth:
-    initial_dialogue: '[smile]你明白了，命运掌握在自己手中。
-
-      钟楼的钟声为你送行，你带着新的勇气和智慧离开。
-
-      【结局：觉醒者】
-
-      你成为了自己命运的主人，未来充满无限可能。
-
-      '
+    initial_dialogue: '[smile]你明白了，命运掌握在自己手中。 钟楼的钟声为你送行，你带着新的勇气和智慧离开。 【结局：觉醒者】 你成为了自己命运的主人，未来充满无限可能。'
     choices: []
     is_end_scene: true
     achievements:
     - 觉醒者
     background: backgrounds/clocktower_ending_truth.png
-    background_gen_prompt: 钟楼外，主角微笑着走出钟楼，阳光洒在身上，远处是广阔的城市和蓝天。
+    background_gen_prompt: 钟楼外，阳光明媚，钟楼高耸在蓝天下，远处是广阔的城市和绿树，气氛明亮开阔。
   ending_leave:
-    initial_dialogue: '[calm]“有时候，观光也是一种选择。”
-
-      你离开了钟楼，但心中留下了些许好奇。
-
-      【结局：平凡旅人】
-
-      你回归日常生活，但偶尔会想起那座神秘的钟楼。
-
-      '
+    initial_dialogue: '[calm]“有时候，观光也是一种选择。” 你离开了钟楼，但心中留下了些许好奇。 【结局：平凡旅人】 你回归日常生活，但偶尔会想起那座神秘的钟楼。'
     choices: []
     is_end_scene: true
     background: backgrounds/clocktower_ending_leave.png
-    background_gen_prompt: 钟楼外，主角离开钟楼，回头望了一眼，钟楼静静矗立在阳光下。
   discuss_puzzle:
     initial_dialogue: '[smile]你向艾琳请教谜题，她微笑着给你一些启发：“有些答案藏在日常的流逝中，也许你可以从时间的角度思考。”你感到思路变得清晰了一些。你可以选择回去阅读发光的书，继续查找其他书籍，或者回到大厅。'
     choices:
@@ -490,6 +451,7 @@ scenes:
       descriptions:
       - 回到大厅
     background: backgrounds/clocktower_discuss_puzzle.png
+    background_gen_prompt: 图书室一角，书桌上摊开几本古书，窗外阳光洒入，书架高大整齐，环境温馨安静。
   observe_mechanism:
     initial_dialogue: 你仔细观察钟声室的机械结构，发现有一个小齿轮上刻着一串数字“314”。也许这是某个机关的密码？你获得了“细致观察者”成就。你可以选择敲响钟声，或者回到大厅。
     choices:
@@ -515,8 +477,9 @@ scenes:
       descriptions:
       - 回到大厅
     background: backgrounds/clocktower_observe_mechanism.png
+    background_gen_prompt: 钟声室内部，巨大的齿轮和机械结构交错，阳光透过高窗照亮金属部件，空间高大明亮。
   crack_box_code:
-    initial_dialogue: 你尝试输入密码。你想输入什么？（你可以尝试“314”或其他数字）
+    initial_dialogue: 你尝试输入密码。你想输入什么？
     choices:
     - choice_id: input_314
       text: 输入“314”
@@ -524,7 +487,7 @@ scenes:
       effects:
         add_achievement: 密码达人
       keywords:
-      - 314
+      - '314'
       - 密码
       - 箱子
       - 解锁
@@ -543,6 +506,8 @@ scenes:
       descriptions:
       - 随便试一个
       - 也许是别的
+    background: backgrounds/clocktower_crack_box_code.png
+    background_gen_prompt: 地下室角落，上锁的旧箱子放在石地面上，墙壁斑驳，微光从小窗照进，气氛神秘。
   code_fail:
     initial_dialogue: '[sad]密码错误，箱子没有打开。你可以再试一次，或者回到大厅。'
     choices:
@@ -568,6 +533,7 @@ scenes:
       descriptions:
       - 回到大厅
     background: backgrounds/clocktower_code_fail.png
+    background_gen_prompt: 地下室昏暗角落，未能打开的箱子静静放在地上，箱子上密码盘反光，周围环境阴暗。
   open_box:
     initial_dialogue: 你用正确的密码打开箱子，里面是一枚刻有钟楼图案的徽章和一张写着“勇气与智慧同在”的纸条。你获得了“钟楼探索者”成就！你可以选择触摸石板，或者回到大厅。
     choices:
@@ -593,3 +559,4 @@ scenes:
       descriptions:
       - 回到大厅
     background: backgrounds/clocktower_open_box.png
+    background_gen_prompt: 地下室微光下，打开的箱子里有徽章和纸条，石墙和地面略显潮湿，环境温暖中带着神秘。
